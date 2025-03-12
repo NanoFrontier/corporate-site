@@ -1,0 +1,314 @@
+/* CSS Variables for theme adjustments */
+:root {
+  --primary-color: #0a74da;
+  --secondary-color: #f9f9f9;
+  --accent-color: #ff5722;
+  --text-color: #333;
+  --bg-overlay: rgba(0, 0, 0, 0.4);
+  --font-family: 'Roboto', sans-serif;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--font-family);
+  line-height: 1.6;
+  color: var(--text-color);
+  background: var(--secondary-color);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+/* Header: 背景透明、上部固定 */
+header {
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1.5rem 0;
+}
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff; /* ロゴを白に設定 */
+}
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+.nav-list li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.nav-list li a:hover {
+  color: var(--accent-color);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  background: url('images/home_river.gif') center/cover no-repeat;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+}
+.hero .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-overlay);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.2rem;
+}
+
+/* Section Padding */
+.section-padding {
+  padding: 4rem 0;
+}
+
+/* Section Headings */
+section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+.grid-2 {
+  grid-template-columns: 1fr;
+}
+.grid-3 {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Card Styles */
+.card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Reverse grid */
+.reverse {
+  direction: rtl;
+}
+.reverse > * {
+  direction: ltr;
+}
+
+/* Responsive Images */
+.responsive-img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Team Member Styles */
+.team-member {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.team-member:hover {
+  transform: translateY(-5px);
+}
+.team-member img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+.team-member h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.team-member .role {
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  text-align: center;
+}
+.modal .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.modal .close:hover {
+  color: #000;
+}
+
+/* Modal Detail Image: 固定サイズ (150px × 150px) かつ中央寄せ */
+.modal-content .detail-img {
+  width: 150px !important;
+  height: 150px !important;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+/* Modal Detail Content: 詳細情報を左寄せにする */
+.modal-content .member-details {
+  text-align: left;
+}
+.modal-content .member-details h3,
+.modal-content .member-details .role {
+  text-align: center;
+}
+.modal-content .member-details p,
+.modal-content .member-details ul {
+  text-align: left;
+}
+
+/* About Us Table - セルの背景色は統一 */
+.about-us table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+.about-us th,
+.about-us td {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  /* 背景色指定を削除して統一 */
+}
+
+/* Contact Section */
+.contact iframe {
+  border: none;
+  border-radius: 8px;
+}
+
+/* Footer */
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #4a90e2;
+    --secondary-color: #121212;
+    --accent-color: #ff5722;
+    --text-color: #f9f9f9;
+    --bg-overlay: rgba(0, 0, 0, 0.6);
+  }
+  body {
+    background: var(--secondary-color);
+    color: var(--text-color);
+  }
+  .logo, .nav-list li a {
+    color: var(--text-color);
+  }
+  .nav-list li a:hover {
+    color: var(--accent-color);
+  }
+  .card {
+    background: #1e1e1e;
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+  }
+  .team-member {
+    background: #1e1e1e;
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+  }
+  .modal-content {
+    background: #1e1e1e;
+    color: var(--text-color);
+  }
+  .about-us th, .about-us td {
+    border-color: #333;
+  }
+  footer {
+    background: #000;
+    color: #fff;
+  }
+}
