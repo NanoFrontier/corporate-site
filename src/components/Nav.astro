@@ -1,0 +1,105 @@
+---
+const navLinks = [
+  { label: 'Why NanoFrontier', href: '/#vision' },
+  { label: '製品・技術', href: '/#technology' },
+  { label: '会社情報', href: '/#company' },
+  { label: 'チーム', href: '/#team' },
+  { label: 'ニュース', href: '/news' },
+];
+---
+<script>
+  if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', () => {
+      const nav = document.getElementById('global-nav');
+      const hero = document.getElementById('hero-section');
+      const onScroll = () => {
+        if (!nav || !hero) return;
+        const heroRect = hero.getBoundingClientRect();
+        if (heroRect.bottom > 80) {
+          nav.classList.add('is-hero');
+        } else {
+          nav.classList.remove('is-hero');
+        }
+      };
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    });
+  }
+</script>
+
+<nav
+  id="global-nav"
+  class="fixed top-0 left-0 w-screen z-50 transition-colors duration-300 bg-white/70 backdrop-blur-md border-b border-blue-100 shadow-sm"
+>
+  <div class="container mx-auto flex items-center justify-between px-4 py-3">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 font-bold text-xl tracking-tight nav-logo">
+      <img src="/images/favicon.svg" alt="NanoFrontier" class="h-8 w-8" />
+      NanoFrontier
+    </a>
+    <!-- Menu -->
+    <ul class="hidden md:flex gap-8 font-medium nav-menu">
+      {navLinks.map(link => (
+        <li>
+          <a href={link.href} class="relative transition nav-link">
+            {link.label}
+            <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <!-- Actions -->
+    <div class="hidden md:flex gap-2 nav-actions">
+      <a href="/recruit" class="px-4 py-1 rounded-full font-semibold transition nav-btn">採用情報</a>
+      <a href="/#contact" class="px-4 py-1 rounded-full font-semibold transition nav-btn">お問い合わせ</a>
+    </div>
+    <!-- Mobile menu button -->
+    <button class="md:hidden flex items-center" aria-label="Open menu">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<style>
+#global-nav.is-hero {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+#global-nav.is-hero .nav-logo,
+#global-nav.is-hero .nav-menu,
+#global-nav.is-hero .nav-link,
+#global-nav.is-hero .nav-btn,
+#global-nav.is-hero .nav-actions {
+  color: #fff !important;
+  fill: #fff !important;
+  background: transparent !important;
+}
+#global-nav .nav-logo,
+#global-nav .nav-menu,
+#global-nav .nav-link,
+#global-nav .nav-btn,
+#global-nav .nav-actions {
+  color: #04666c;
+  fill: #04666c;
+}
+#global-nav .nav-btn {
+  background: #e0f7fa;
+}
+#global-nav .nav-btn:hover {
+  background: #b2ebf2;
+}
+#global-nav .nav-link span {
+  background: #04666c;
+}
+#global-nav {
+  border-bottom-color: #04666c;
+}
+#global-nav.is-hero .nav-btn {
+  background: rgba(255,255,255,0.2) !important;
+  color: #fff !important;
+}
+</style> 

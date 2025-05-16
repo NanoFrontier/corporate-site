@@ -1,0 +1,60 @@
+---
+interface Props {
+  id: string;
+  title: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<div id={id} class="modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+  <div class="modal-content bg-white rounded-lg p-6 max-w-2xl w-full mx-4 modal-enter">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold">{title}</h2>
+      <button class="modal-close text-gray-500 hover:text-gray-700 transition-smooth">
+        <span class="text-2xl">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ modalId: id }}>
+  function setupModal() {
+    const modal = document.getElementById(modalId);
+    const closeBtn = modal?.querySelector('.modal-close');
+    const modalContent = modal?.querySelector('.modal-content');
+
+    function closeModal() {
+      modal?.classList.add('modal-leave');
+      setTimeout(() => {
+        modal?.classList.add('hidden');
+        modal?.classList.remove('modal-leave');
+      }, 300);
+    }
+
+    // 閉じるボタンのクリックイベント
+    closeBtn?.addEventListener('click', closeModal);
+
+    // モーダル外クリックで閉じる
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // ESCキーで閉じる
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  }
+
+  // コンポーネントがマウントされたときに実行
+  document.addEventListener('astro:page-load', setupModal);
+  // 初回ロード時にも実行
+  setupModal();
+</script>
