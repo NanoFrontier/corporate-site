@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const newsList = (await getCollection('news'))
+  .sort((a, b) => b.data.date.localeCompare(a.data.date));
+---
+
+<Layout title="ニュース一覧 | NanoFrontier">
+  <main class="py-12 bg-gray-50 min-h-screen pt-24">
+    <h1 class="text-3xl font-bold mb-8 text-center" style="color:#04666c">ニュース・お知らせ一覧</h1>
+    <div class="max-w-2xl mx-auto flex flex-col gap-y-6 px-4">
+      {newsList.map(news => (
+        <a
+          href={`/news/${news.slug}`}
+          class="block bg-white/90 rounded-xl border border-gray-100 shadow hover:shadow-lg transition-shadow p-6 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#04666c]"
+          style="text-decoration:none;"
+        >
+          <div class="text-gray-500 text-sm mb-1">{news.data.date}</div>
+          <div class="font-semibold text-lg group-hover:underline" style="color:#04666c">{news.data.title}</div>
+          <div class="text-gray-700">{news.data.summary}</div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>
