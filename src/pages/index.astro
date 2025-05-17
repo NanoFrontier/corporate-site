@@ -1,58 +1,57 @@
 ---
-import { getEntry, getCollection } from 'astro:content';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
+import seiya_inoue from '../images/seiya_inoue.jpg?url';
+import kouki_oka from '../images/kouki_oka.jpg?url';
+import hero_bg2 from '../images/hero-bg2.mp4?url';
+import hero_bg_image from '../images/hero-bg.png?url';
+const base = import.meta.env.BASE_URL;
 
 const newsList = (await getCollection('news'))
   .sort((a, b) => b.data.date.localeCompare(a.data.date))
   .slice(0, 3);
 ---
 
-<Layout title="NanoFrontier - 未来を創る">
+<Layout title="NanoFrontier - ナノフロンティア">
   <!-- Hero Section (container外、全画面) -->
   <section id="hero-section" class="relative min-h-screen w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex items-center justify-center overflow-hidden">
 	<video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-70">
-		<source src="images/hero-bg2.mp4" type="video/mp4" />
-		<img src="images/hero-bg.png" alt="NanoFrontier Hero" class="w-full h-full object-cover opacity-60" />
+		<source src={hero_bg2} type="video/mp4" />
+		<img src={hero_bg_image} alt="NanoFrontier Hero" class="w-full h-full object-cover opacity-60" />
 	</video>
-    <div class="absolute inset-0" />
+	<div class="absolute inset-0 bg-black/20 pointer-events-none z-10"></div>
     <div class="relative z-10 text-center text-white">
-      <h1 class="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">Tiny Tech,<br />Giant Impact.</h1>
-      <p class="text-xl md:text-2xl font-semibold mb-2">小さな技術で、巨大なインパクト。</p>
-      <p class="text-lg" style="color:#04666c">Nano-scale manufacturing that powers a sustainable future</p>
+      <h1 class="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">Tiny Particles,<br />Huge Impact.</h1>
+      <p class="text-xl md:text-2xl font-semibold mb-2">あらゆる資源がなめらかに循環し、最適な形で利用される社会へ</p>
     </div>
   </section>
   <main class="container py-12 space-y-16 pt-20">
       <div id="vision" class="container mx-auto px-4 scroll-mt-24">
-        <h2 class="text-3xl font-bold mb-2" style="color:#04666c">ビジョン・ミッション</h2>
-        <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
-        <p class="text-2xl font-semibold mb-4">あらゆる資源がなめらかに循環し、最適な形で利用される社会へ</p>
-        <p class="text-lg mb-8">誰もが手にできる圧倒的低コストな技術を商業化し続ける</p>
+        <p class="text-2xl font-semibold mb-4" style="color: #04666c;">誰もが手にできる圧倒的低コストな技術を商業化し続ける</p>
         <div class="text-gray-700 space-y-4">
-          <p>持続可能な社会の実現には、資源の有効活用と循環が不可欠です。しかし、現状では多くの資源が最適に循環せず、廃棄や環境負荷の増大が課題となっています。</p>
-          <p>高度AI情報化社会やDX推進の時代において、誰もが利用できる低コストな技術の普及は、社会全体のイノベーションと持続可能性を加速させます。</p>
+          <p>私たちは、限られた人しか使えない高価で複雑な技術ではなく、誰もがアクセスできるシンプルで安価な技術にこだわります。
+			</p>
+			<p>技術そのものではなく、それが現実の課題を解決できるかどうかに価値を置き、常に社会に必要な技術を見極め、次々と商業化していきます。</p>
         </div>
       </div>
 
     <!-- Technology -->
       <div id="technology" class="container mx-auto px-4 scroll-mt-24">
-        <h2 class="text-3xl font-bold mb-2" style="color:#04666c">製品・技術</h2>
+        <h2 class="text-2xl font-bold mb-2" style="color:#04666c">製品・技術</h2>
         <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
 		<div class="mb-4 font-semibold text-lg">
-            化合物のナノ粒子化技術で、さまざまな分野の課題を解決します。
+            化合物のナノ粒子化技術で、さまざまな分野の課題を解決。
           </div>
           <p class="mb-6 text-gray-700">
-            東北大学発の独自改良「再沈殿法」により、<b>従来困難だった化合物の安定したナノ粒子化</b>を実現。<br>
-            <b>ナノ粒子の溶液中への分散・微細化・表面積増加</b>によって、物性向上や新たな応用が可能になります。<br>
+            東北大学発の独自改良「再沈殿法」により、従来困難だった化合物の安定したナノ粒子化を実現。ナノ粒子の溶液中への分散・微細化・表面積増加</b>によって、物性向上や新たな応用が可能になります。
             この技術を活用し、さまざまな分野でソリューションを展開しています。
 		</p>
 
 		<!-- 技術セクション -->
         <section class="mb-12">
-			<h3 class="text-2xl font-bold mb-4">技術</h3>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 			  <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
-				<h4 class="font-bold text-lg mb-2" style="color:#04666c">独自再沈殿法</h4>
+				<h4 class="font-bold text-lg mb-2" style="color:#04666c">独自再沈技術</h4>
 				<p class="text-gray-700 mb-2">化合物の粒径を数十nm単位で精密制御できる独自技術。</p>
 				<ul class="list-disc pl-5 text-gray-700 text-sm space-y-1">
 				  <li>高分散性・高感度センシング性能</li>
@@ -72,48 +71,54 @@ const newsList = (await getCollection('news'))
 
         <!-- アプリケーション事例セクション -->
         <section>
-          <h3 class="text-2xl font-bold mb-4">ナノ粒子化技術の応用事例</h3>
+			<h3 class="text-lg font-bold mb-4">ソリューション</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
-              <h4 class="font-bold text-lg mb-2" style="color:#04666c">汚染物質検出用試薬</h4>
+              <h4 class="font-bold text-lg mb-2" style="color:#04666c">水中微量汚染物質のリアルタイム検出</h4>
               <p class="text-gray-700 text-sm">
-                有機色素をナノ粒子化し、水中でリアルタイム・高感度・低コスト検出を実現。<br>
+                色素をナノ粒子化し、水中でリアルタイム・高感度・低コスト検出を実現。<br>
                 <span class="font-bold">従来水に溶けなかった色素も分散可能</span>で、環境モニタリング等に応用。
               </p>
             </div>
             <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
-              <h4 class="font-bold text-lg mb-2" style="color:#04666c">電解液・蓄電池</h4>
+              <h4 class="font-bold text-lg mb-2" style="color:#04666c">次世代の高電圧・低コスト蓄電池の開発</h4>
               <p class="text-gray-700 text-sm">
                 電解液内の電化を帯びた化合物をナノ粒子化。<br>
                 <span class="font-bold">イオン交換膜を容易に通過</span>し、<b>低コスト・高電圧な蓄電池</b>の開発に貢献。
               </p>
             </div>
             <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
-              <h4 class="font-bold text-lg mb-2" style="color:#04666c">冷却液</h4>
+              <h4 class="font-bold text-lg mb-2" style="color:#04666c">冷却液性能の引き上げ</h4>
               <p class="text-gray-700 text-sm">
                 冷却液内にナノ粒子を高濃度分散、または対象物をナノ粒子でコーティング。<br>
                 <span class="font-bold">熱移動が促進され、冷却効率が向上</span>。
               </p>
             </div>
             <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
-              <h4 class="font-bold text-lg mb-2" style="color:#04666c">水素運搬液</h4>
+              <h4 class="font-bold text-lg mb-2" style="color:#04666c">水素の安全・安価な運搬</h4>
               <p class="text-gray-700 text-sm">
                 水素を吸着する化合物をナノ粒子化し水中分散。<br>
                 <span class="font-bold">より安全・安価な水素運搬</span>が可能に。
               </p>
             </div>
             <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
-              <h4 class="font-bold text-lg mb-2" style="color:#04666c">抗がん剤（医薬品原料）</h4>
+              <h4 class="font-bold text-lg mb-2" style="color:#04666c">抗がん剤（医薬品）の副作用の低減</h4>
               <p class="text-gray-700 text-sm">
                 ドラッグのナノ粒子化でがん組織に効率集積。<br>
                 <span class="font-bold">副作用を抑えたドラッグデリバリー</span>が可能。
               </p>
             </div>
+			<div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
+				<h4 class="font-bold text-lg mb-2" style="color:#04666c">+ カスタムソリューション</h4>
+				<p class="text-gray-700 text-sm">
+					お客様の課題に合わせて、ナノ粒子化技術を活用したソリューションをご提案いたします。
+				</p>
+			  </div>
           </div>
         </section>
 
         <section class="my-12">
-          <h3 class="text-2xl font-bold mb-4">お客様とのパートナーシップの形</h3>
+          <h3 class="text-lg font-bold mb-4">お客様とのパートナーシップの形</h3>
           <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-8 mx-auto">
             <ul class="list-disc pl-8 text-gray-700 space-y-4">
               <li><span class="font-bold text-[#04666c]">試薬品の開発・製造・販売：</span> 試料の研究開発からナノ粒子化まで行い完成品を提供</li>
@@ -177,12 +182,12 @@ const newsList = (await getCollection('news'))
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Member Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
-          <img src="/images/seiya_inoue.jpg" alt="井上誠也" class="w-28 h-28 rounded-full object-cover border-4 shadow-md mb-4 hover:scale-105 transition-transform duration-300" style="border-color:#04666c" />
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={seiya_inoue} alt="井上誠也" class="w-28 h-28 rounded-full object-cover border-4 shadow-md mb-4" style="border-color:#04666c" />
           <div class="text-center">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">井上誠也</div>
             <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">CEO</span>
-            <div class="text-gray-700 mb-8 text-left">AI開発ベンチャー、ファンド、VC、Microsoftでの経験を経て起業。</div>
+            <div class="text-gray-700 mb-8 text-left">AI開発ベンチャー、VC、Microsoftでの経験を経て起業。</div>
             <ul class="list-disc pl-5 text-gray-700 text-sm text-left space-y-1">
               <li>東京大学農学部、新規有機化合物の全合成</li>
               <li>東京大学大学院修士課程、機械学習を用いたタンパク質の反応予測</li>
@@ -192,12 +197,12 @@ const newsList = (await getCollection('news'))
           </div>
         </div>
         <!-- Member Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
-          <img src="/images/kouki_oka.jpg" alt="岡弘樹" class="w-28 h-28 rounded-full object-cover border-4 shadow-md mb-4 hover:scale-105 transition-transform duration-300" style="border-color:#04666c" />
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={kouki_oka} alt="岡弘樹" class="w-28 h-28 rounded-full object-cover border-4 shadow-md mb-4" style="border-color:#04666c" />
           <div class="text-center">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">岡弘樹</div>
             <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">CTO</span>
-            <div class="text-gray-700 mb-8 text-left">有機材料・電池・触媒・水素製造の研究者。数々の受賞歴。東北大学准教授。</div>
+            <div class="text-gray-700 mb-8 text-left">東北大学准教授。有機材料・電池・触媒・水素製造の研究者。</div>
             <ul class="list-disc pl-5 text-gray-700 text-sm text-left space-y-1">
               <li>早稲田大学大学院博士課程（飛び級修了）</li>
               <li>有機材料・電池・触媒・水素製造の研究</li>
@@ -215,14 +220,14 @@ const newsList = (await getCollection('news'))
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="space-y-4 mb-4">
         {newsList.map(news => (
-          <a href={`/news/${news.slug}`} class="block bg-white/90 rounded-xl border border-gray-100 shadow hover:shadow-lg transition-shadow p-4 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#04666c]" style="text-decoration:none;">
+          <a href={`${base}news/${news.slug}`} class="block bg-white/90 rounded-xl border border-gray-100 shadow hover:shadow-lg transition-shadow p-4 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#04666c]" style="text-decoration:none;">
             <div class="text-gray-500 text-sm mb-1">{news.data.date}</div>
             <div class="font-semibold group-hover:underline" style="color:#04666c">{news.data.title}</div>
             <div class="text-gray-700">{news.data.summary}</div>
           </a>
         ))}
       </div>
-      <a href="/news" class="hover:underline" style="color:#04666c">ニュース一覧を見る →</a>
+      <a href={`${base}news/`} class="hover:underline" style="color:#04666c">ニュース一覧を見る →</a>
     </div>
 
     <!-- Contact -->

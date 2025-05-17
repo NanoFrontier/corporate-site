@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-
+const base = import.meta.env.BASE_URL;
 export async function getStaticPaths() {
   const newsList = await getCollection('news');
   return newsList.map((news) => ({
@@ -19,7 +19,7 @@ const { Content } = await render(news);
   <main class="min-h-screen bg-gray-50 py-12 pt-24">
     <div class="max-w-3xl mx-auto px-4">
       <a 
-        href="/news" 
+        href={`${base}news/`} 
         class="inline-flex items-center text-[#04666c] hover:underline mb-8 group"
       >
         <svg 
