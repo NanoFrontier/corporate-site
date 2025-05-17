@@ -1,30 +1,125 @@
 ---
+import favicon from '../images/favicon.svg?url';
+const base = import.meta.env.BASE_URL;
 const navLinks = [
-  { label: 'Why NanoFrontier', href: '/#vision' },
-  { label: '製品・技術', href: '/#technology' },
-  { label: '会社情報', href: '/#company' },
-  { label: 'チーム', href: '/#team' },
-  { label: 'ニュース', href: '/news' },
+  { label: 'Mission', href: `${base}#vision` },
+  { label: '製品・技術', href: `${base}#technology` },
+  { label: '会社情報', href: `${base}#company` },
+  { label: 'チーム', href: `${base}#team` },
+  { label: 'ニュース', href: `${base}news` },
 ];
 ---
 <script>
-  if (typeof window !== 'undefined') {
-    window.addEventListener('DOMContentLoaded', () => {
-      const nav = document.getElementById('global-nav');
-      const hero = document.getElementById('hero-section');
-      const onScroll = () => {
-        if (!nav || !hero) return;
-        const heroRect = hero.getBoundingClientRect();
-        if (heroRect.bottom > 80) {
-          nav.classList.add('is-hero');
-        } else {
-          nav.classList.remove('is-hero');
-        }
-      };
-      window.addEventListener('scroll', onScroll);
-      onScroll();
+  document.addEventListener('DOMContentLoaded', () => {
+    // @ts-ignore
+    window['base'] = "";
+    try { 
+      // @ts-ignore
+      window['base'] = import.meta.env.BASE_URL; 
+    } catch(e) {}
+    const nav = document.getElementById('global-nav');
+    const hero = document.getElementById('hero-section');
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const menuOverlay = document.getElementById('mobile-menu-overlay');
+    const closeBtn = document.getElementById('mobile-menu-close');
+    let menuOpen = false;
+
+    const setBodyScroll = (disable: boolean) => {
+      if (disable) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    };
+
+    const openMenu = () => {
+      if (menuOverlay) {
+        menuOverlay.classList.remove('hidden');
+        setBodyScroll(true);
+        menuOpen = true;
+      }
+    };
+    const closeMenu = () => {
+      if (menuOverlay) {
+        menuOverlay.classList.add('hidden');
+        setBodyScroll(false);
+        menuOpen = false;
+      }
+    };
+
+    if (menuBtn && menuOverlay) {
+      menuBtn.addEventListener('click', openMenu);
+      if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+      menuOverlay.addEventListener('click', (e) => {
+        if (e.target === menuOverlay) closeMenu();
+      });
+    }
+
+    // メニュー内リンククリックで閉じる
+    menuOverlay?.querySelectorAll('a').forEach(anchor => {
+      anchor.addEventListener('click', () => closeMenu());
     });
-  }
+
+    // Add smooth scrolling for anchor links
+    // @ts-ignore
+    document.querySelectorAll('a[href^="#"], a[href^="' + window['base'] + '#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const href = anchor.getAttribute('href');
+        // トップページ以外ではpreventDefaultしない
+        // baseの末尾スラッシュ有無両対応
+        // @ts-ignore
+        const basePath = window['base'];
+        const currentPath = location.pathname;
+        // @ts-ignore
+        const isTop = (currentPath === basePath) || (currentPath === basePath.replace(/\/$/, ''));
+        if (
+          href &&
+          (href.startsWith('#') ||
+          // @ts-ignore
+          href.startsWith(window['base'] + '#')) &&
+          isTop
+        ) {
+          e.preventDefault();
+          // @ts-ignore
+          const targetId = href.replace(window['base'], '').substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+          closeMenu();
+        }
+        // サブページでは通常のリンク遷移（ページ遷移後にscrollToHashIfNeededが効く）
+      });
+    });
+
+    // ヒーローセクションによるナビ背景切り替え
+    const onScroll = () => {
+      if (!nav || !hero) return;
+      const heroRect = hero.getBoundingClientRect();
+      if (heroRect.bottom > 80) {
+        nav.classList.add('is-hero');
+      } else {
+        nav.classList.remove('is-hero');
+      }
+    };
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+
+    // ページロードや履歴遷移時にアンカーがあればスムーズスクロール
+    function scrollToHashIfNeeded() {
+      if (location.hash) {
+        const id = location.hash.replace('#', '');
+        const el = document.getElementById(id);
+        if (el) {
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', scrollToHashIfNeeded);
+    window.addEventListener('hashchange', scrollToHashIfNeeded);
+  });
 </script>
 
 <nav
@@ -33,11 +128,11 @@ const navLinks = [
 >
   <div class="container mx-auto flex items-center justify-between px-4 py-3">
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 font-bold text-xl tracking-tight nav-logo">
-      <img src="/images/favicon.svg" alt="NanoFrontier" class="h-8 w-8" />
+    <a href={base} class="flex items-center gap-2 font-bold text-xl tracking-tight nav-logo">
+      <img src={favicon} alt="NanoFrontier" class="h-8 w-8" />
       NanoFrontier
     </a>
-    <!-- Menu -->
+    <!-- Menu (PC) -->
     <ul class="hidden md:flex gap-8 font-medium nav-menu">
       {navLinks.map(link => (
         <li>
@@ -48,17 +143,30 @@ const navLinks = [
         </li>
       ))}
     </ul>
-    <!-- Actions -->
+    <!-- Actions (PC) -->
     <div class="hidden md:flex gap-2 nav-actions">
-      <a href="/recruit" class="px-4 py-1 rounded-full font-semibold transition nav-btn">採用情報</a>
-      <a href="/#contact" class="px-4 py-1 rounded-full font-semibold transition nav-btn">お問い合わせ</a>
+      <a href={`${base}recruit`} class="px-4 py-1 rounded-full font-semibold transition nav-btn">採用情報</a>
+      <a href={`${base}#contact`} class="px-4 py-1 rounded-full font-semibold transition nav-btn">お問い合わせ</a>
     </div>
     <!-- Mobile menu button -->
-    <button class="md:hidden flex items-center" aria-label="Open menu">
+    <button id="mobile-menu-btn" class="md:hidden flex items-center text-[#04666c] transition-colors duration-300" aria-label="Open menu">
       <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
     </button>
+  </div>
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu-overlay" class="hidden fixed inset-0 z-50 bg-[#04666c] flex flex-col items-center justify-center transition-all duration-300 md:hidden" style="min-height: 100dvh;">
+    <!-- 閉じるボタン -->
+    <button id="mobile-menu-close" class="absolute top-4 right-4 text-3xl text-white p-2 rounded-full hover:bg-white/10" aria-label="Close menu">&times;</button>
+    <!-- メニュー本体 -->
+    <nav class="flex flex-col gap-8 items-center w-full">
+      {navLinks.map(link => (
+        <a href={link.href} class="text-2xl font-bold text-white w-full text-center py-3 hover:bg-white/10 rounded transition">{link.label}</a>
+      ))}
+      <a href={`${base}recruit`} class="w-4/5 text-center px-4 py-3 rounded-full font-semibold bg-white text-[#04666c] nav-btn text-lg mt-4">採用情報</a>
+      <a href={`${base}#contact`} class="w-4/5 text-center px-4 py-3 rounded-full font-semibold bg-white text-[#04666c] nav-btn text-lg">お問い合わせ</a>
+    </nav>
   </div>
 </nav>
 
@@ -73,10 +181,16 @@ const navLinks = [
 #global-nav.is-hero .nav-menu,
 #global-nav.is-hero .nav-link,
 #global-nav.is-hero .nav-btn,
-#global-nav.is-hero .nav-actions {
+#global-nav.is-hero .nav-actions,
+#global-nav.is-hero .nav-logo *,
+#global-nav.is-hero .nav-menu *,
+#global-nav.is-hero .nav-link *,
+#global-nav.is-hero .nav-btn *,
+#global-nav.is-hero .nav-actions * {
   color: #fff !important;
   fill: #fff !important;
   background: transparent !important;
+  border-color: rgba(255,255,255,0.2) !important;
 }
 #global-nav .nav-logo,
 #global-nav .nav-menu,
@@ -101,5 +215,25 @@ const navLinks = [
 #global-nav.is-hero .nav-btn {
   background: rgba(255,255,255,0.2) !important;
   color: #fff !important;
+}
+#global-nav.is-hero .nav-link span {
+  background: #fff !important;
+}
+#mobile-menu {
+  box-shadow: 0 8px 32px rgba(4,102,108,0.12), 0 1.5px 4px rgba(4,102,108,0.08);
+}
+#mobile-menu-close {
+  font-size: 2rem;
+  line-height: 1;
+}
+#global-nav.is-hero #mobile-menu-btn,
+#global-nav.is-hero #mobile-menu-btn svg {
+  color: #fff !important;
+  stroke: #fff !important;
+}
+#mobile-menu-btn,
+#mobile-menu-btn svg {
+  color: #04666c;
+  stroke: #04666c;
 }
 </style> 
