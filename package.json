@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "astro build && git worktree add dist origin/gh-pages && cp -r dist/* dist/.git/* dist"
   },
   "dependencies": {
     "astro": "^5.7.13"
