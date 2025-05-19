@@ -1,47 +1,143 @@
-# Astro Starter Kit: Minimal
+# NanoFrontier コーポレートサイト
 
-```sh
-npm create astro@latest -- --template minimal
+NanoFrontier株式会社のコーポレートサイトのソースコードです。Astro.jsを使用して構築されています。
+
+## 技術スタック
+
+- [Astro.js](https://astro.build/) - 静的サイトジェネレーター
+- [Tailwind CSS](https://tailwindcss.com/) - スタイリング
+- TypeScript - 型安全な開発
+
+## 開発環境のセットアップ
+
+1. リポジトリをクローン
+```bash
+git clone [repository-url]
+cd corporate-site
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+2. 依存関係のインストール
+```bash
+npm install
+```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+3. 開発サーバーの起動
+```bash
+npm run dev
+```
 
-## 🚀 Project Structure
+4. ブラウザで確認
+- 開発サーバーが起動したら、ブラウザで `http://localhost:4321` にアクセス
+- ファイルを編集すると、自動的にブラウザが更新されます（ホットリロード）
 
-Inside of your Astro project, you'll see the following folders and files:
 
-```text
-/
-├── public/
+## 開発フロー
+
+1. 新しい機能や修正を開発する際は、`dev` ブランチから新しいブランチを作成
+```bash
+git checkout dev
+git pull origin dev
+git checkout -b feature/your-feature-name
+```
+
+2. 変更をコミットしてプッシュ
+```bash
+git add .
+git commit -m "変更内容の説明"
+git push origin feature/your-feature-name
+```
+
+3. GitHubでプルリクエストを作成
+   - まず `dev` ブランチに向けてプルリクエストを作成
+   - レビュー後に `dev` ブランチにマージ
+   - その後、`dev` ブランチから `main` ブランチへのプルリクエストを作成
+   - レビュー後に `main` ブランチにマージ
+
+## デプロイメント
+
+このプロジェクトは自動デプロイメントが設定されています：
+
+1. `main` ブランチへのプルリクエストがマージされると、自動的にビルドが実行されます
+2. ビルドが成功すると、自動的に本番環境のウェブサイトが更新されます
+3. デプロイの状態はGitHub Actionsで確認できます
+
+手動でビルドを確認したい場合：
+
+```bash
+npm run build
+npm run preview
+```
+
+## 注意事項
+
+- PDFファイルは必ず `public/pdfs/` ディレクトリに配置してください
+- 画像ファイルは `src/images/` ディレクトリに配置してください
+- コンテンツの更新は、対応するMarkdownファイルを編集してください
+- コミットメッセージは変更内容が分かりやすいように記述してください
+
+## プロジェクト構造
+
+```
+corporate-site/
+├── public/          # 静的ファイル（画像、PDF等）
+│   └── pdfs/       # PDFファイル
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/ # 再利用可能なコンポーネント
+│   ├── content/    # コンテンツファイル（ニュース等）
+│   ├── images/     # 画像ファイル
+│   ├── layouts/    # レイアウトコンポーネント
+│   └── pages/      # ページコンポーネント
+└── styles/         # グローバルスタイル
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 編集方法
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### 1. ニュースの追加
 
-Any static assets, like images, can be placed in the `public/` directory.
+1. `src/content/news/` ディレクトリに新しいMarkdownファイルを作成
+2. 以下の形式で記述：
 
-## 🧞 Commands
+```markdown
+---
+title: "ニュースのタイトル"
+date: "YYYY-MM-DD"
+summary: "ニュースの概要"
+---
 
-All commands are run from the root of the project, from a terminal:
+ニュースの本文
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### 2. PDFの追加・更新
 
-## 👀 Want to learn more?
+1. PDFファイルを `public/pdfs/` ディレクトリに配置
+2. `src/pages/index.astro` のPDFビューアーセクションで、`data` 属性のパスを更新：
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```astro
+<object
+  data="/pdfs/your-pdf-file.pdf"
+  type="application/pdf"
+  width="100%"
+  height="600px"
+  class="rounded-lg"
+>
+  <p>PDFを表示できません。<a href="/pdfs/your-pdf-file.pdf" class="text-[#04666c] hover:underline">PDFをダウンロード</a></p>
+</object>
+```
+
+### 3. 画像の追加・更新
+
+1. 画像ファイルを `src/images/` ディレクトリに配置
+2. コンポーネントで画像をインポートして使用：
+
+```astro
+---
+import myImage from '../images/my-image.jpg?url';
+---
+<img src={myImage} alt="説明" />
+```
+
+### 4. スタイルのカスタマイズ
+
+- グローバルスタイル: `src/styles/globals.css`
+- コンポーネント固有のスタイル: 各コンポーネントファイル内の `<style>` タグ
+- Tailwind CSSの設定: `tailwind.config.mjs`
