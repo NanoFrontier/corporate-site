@@ -127,6 +127,22 @@ const newsList = (await getCollection('news'))
             </ul>
           </div>
         </section>
+
+        <!-- PDFビューアー -->
+        <section class="my-12">
+          <h3 class="text-lg font-bold mb-4">紹介資料</h3>
+          <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
+            <object
+              data="/pdfs/NanoFrontier_Business_Overview_Simple.pdf"
+              type="application/pdf"
+              width="100%"
+              height="600px"
+              class="rounded-lg"
+            >
+              <p>PDFを表示できません。<a href="/pdfs/NanoFrontier_Business_Overview_Simple.pdf" class="text-[#04666c] hover:underline">PDFをダウンロード</a></p>
+            </object>
+          </div>
+        </section>
       </div>
 
     <!-- Company -->
