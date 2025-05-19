@@ -6,7 +6,11 @@ const newsList = (await getCollection('news'))
   .sort((a, b) => b.data.date.localeCompare(a.data.date));
 ---
 
-<Layout title="ニュース一覧 | NanoFrontier">
+<Layout 
+  title="ニュース一覧 | NanoFrontier"
+  description="NanoFrontier株式会社の最新ニュース・お知らせをご覧いただけます。技術開発、製品情報、会社情報など、最新の情報をお届けします。"
+  image="/images/hero-bg.png"
+>
   <main class="py-12 bg-gray-50 min-h-screen pt-24">
     <h1 class="text-3xl font-bold mb-8 text-center" style="color:#04666c">ニュース・お知らせ一覧</h1>
     <div class="max-w-2xl mx-auto flex flex-col gap-y-6 px-4">
