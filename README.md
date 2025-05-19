@@ -141,3 +141,72 @@ import myImage from '../images/my-image.jpg?url';
 - グローバルスタイル: `src/styles/globals.css`
 - コンポーネント固有のスタイル: 各コンポーネントファイル内の `<style>` タグ
 - Tailwind CSSの設定: `tailwind.config.mjs`
+
+### 5. OGP（Open Graph Protocol）の設定
+
+各ページのOGP設定は、`Layout.astro` コンポーネントで行います：
+
+```astro
+---
+// src/layouts/Layout.astro
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const { 
+  title,
+  description = "NanoFrontier株式会社は、ナノ粒子化技術を用いて、さまざまな分野の課題解決に取り組んでいます。",
+  image = "/images/ogp-default.jpg"
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    
+    <!-- OGP設定 -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:site_name" content="NanoFrontier" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- その他のメタタグ -->
+    <link rel="icon" type="image/svg+xml" href={favicon} />
+    <link rel="stylesheet" href="/src/styles/globals.css" />
+  </head>
+  <body>
+    <Nav />
+    <slot />
+  </body>
+</html>
+```
+
+ページごとにOGPを設定する場合：
+
+```astro
+---
+// 各ページのコンポーネント
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="ページタイトル"
+  description="ページの説明文"
+  image="/images/page-specific-ogp.jpg"
+>
+  <!-- ページのコンテンツ -->
+</Layout>
+```
+
+注意事項：
+- OGP画像は `public/images/` ディレクトリに配置してください
+- 画像サイズは1200x630ピクセルを推奨
+- 各ページで適切なタイトルと説明文を設定してください
