@@ -1,25 +1,33 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL;
+
 export async function getStaticPaths() {
-  const newsList = await getCollection('news');
-  return newsList.map((news) => ({
-    params: { slug: news.slug },
-    props: news,
-  }));
+  const newsListJa = await getCollection('news', ({ id }) => id.startsWith('ja/'));
+  const newsListEn = await getCollection('news', ({ id }) => id.startsWith('en/'));
+  
+  return [...newsListJa, ...newsListEn].map((news) => {
+    const lang = news.id.startsWith('ja/') ? 'ja' : 'en';
+    const slug = news.id.split('/')[1].replace('.md', '');
+    return {
+      params: { lang, slug },
+      props: news,
+    };
+  });
 }
+
 type Props = CollectionEntry<'news'>;
 
 const news = Astro.props;
-const { Content } = await render(news);
+const { Content } = await news.render();
 ---
 
 <Layout title={`${news.data.title} | NanoFrontier`}>
   <main class="min-h-screen bg-gray-50 py-12 pt-24">
     <div class="max-w-3xl mx-auto px-4">
       <a 
-        href={`${base}news/`} 
+        href={`${base}news/${Astro.params.lang}/`} 
         class="inline-flex items-center text-[#04666c] hover:underline mb-8 group"
       >
         <svg 
@@ -30,7 +38,7 @@ const { Content } = await render(news);
         >
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
-        ニュース一覧へ戻る
+        {Astro.params.lang === 'ja' ? 'ニュース一覧へ戻る' : 'Back to News'}
       </a>
 
       <article class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
