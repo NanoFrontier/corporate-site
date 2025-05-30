@@ -7,9 +7,13 @@ import hero_bg2 from '../images/hero-bg2.mp4?url';
 import hero_bg_image from '../images/hero-bg.png?url';
 const base = import.meta.env.BASE_URL;
 
-const newsList = (await getCollection('news'))
+const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
   .sort((a, b) => b.data.date.localeCompare(a.data.date))
-  .slice(0, 3);
+  .slice(0, 3)
+  .map(news => ({
+    ...news,
+    slug: news.slug.replace('ja/', '')
+  }));
 ---
 
 <Layout 

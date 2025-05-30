@@ -1,0 +1,101 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+
+// Items per page
+const ITEMS_PER_PAGE = 20;
+
+// Get current page number from query parameters
+const url = new URL(Astro.request.url);
+const currentPage = parseInt(url.searchParams.get('page') || '1');
+
+// Get and sort all news articles
+const allNews = (await getCollection('news', ({ id }) => id.startsWith('en/')))
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .map(news => ({
+    ...news,
+    slug: news.slug.replace('en/', '')
+  }));
+
+// Calculate total pages
+const totalPages = Math.ceil(allNews.length / ITEMS_PER_PAGE);
+
+// Get news articles for current page
+const newsList = allNews.slice(
+  (currentPage - 1) * ITEMS_PER_PAGE,
+  currentPage * ITEMS_PER_PAGE
+);
+
+// Generate pagination URLs
+const createPageUrl = (pageNum: number) => {
+  if (pageNum === 1) {
+    return `${base}en/news/`;
+  }
+  return `${base}en/news/?page=${pageNum}`;
+};
+---
+
+<Layout
+  title="News & Updates | NanoFrontier"
+  description="Latest news and updates from NanoFrontier Inc."
+  lang="en"
+  alternateUrls={{
+    "en": "https://nanofrontier.co.jp/en/news/",
+    "ja": "https://nanofrontier.co.jp/news/"
+  }}
+>
+  <main class="container mx-auto px-4 py-12 pt-24">
+    <h1 class="text-4xl font-bold mb-8" style="color:#04666c">News & Updates</h1>
+    <div class="space-y-6 mb-8">
+      {newsList.map(news => (
+        <a href={`${base}en/news/${news.slug}`} class="block bg-white rounded-xl border border-gray-200 shadow hover:shadow-lg transition-shadow p-6">
+          <div class="text-gray-500 text-sm mb-2">{news.data.date}</div>
+          <h2 class="text-xl font-semibold mb-2" style="color:#04666c">{news.data.title}</h2>
+          <p class="text-gray-700">{news.data.summary}</p>
+        </a>
+      ))}
+    </div>
+
+    {/* Pagination */}
+    {totalPages > 1 && (
+      <div class="flex justify-center items-center gap-2 mt-8">
+        {/* Previous page */}
+        {currentPage > 1 && (
+          <a
+            href={createPageUrl(currentPage - 1)}
+            class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 text-gray-700"
+          >
+            Previous
+          </a>
+        )}
+
+        {/* Page numbers */}
+        <div class="flex gap-2">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(pageNum => (
+            <a
+              href={createPageUrl(pageNum)}
+              class={`px-4 py-2 rounded-lg ${
+                currentPage === pageNum
+                  ? 'bg-[#04666c] text-white'
+                  : 'bg-white border border-gray-300 hover:bg-gray-50 text-gray-700'
+              }`}
+            >
+              {pageNum}
+            </a>
+          ))}
+        </div>
+
+        {/* Next page */}
+        {currentPage < totalPages && (
+          <a
+            href={createPageUrl(currentPage + 1)}
+            class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 text-gray-700"
+          >
+            Next
+          </a>
+        )}
+      </div>
+    )}
+  </main>
+</Layout> 

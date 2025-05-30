@@ -1,13 +1,35 @@
 ---
 import favicon from '../images/favicon.svg?url';
 const base = import.meta.env.BASE_URL;
-const navLinks = [
-  { label: 'Mission', href: `${base}#vision` },
-  { label: '製品・技術', href: `${base}#technology` },
-  { label: '会社情報', href: `${base}#company` },
-  { label: 'チーム', href: `${base}#team` },
-  { label: 'ニュース', href: `${base}news` },
-];
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'ja' } = Astro.props;
+
+const navLinks = {
+  ja: [
+    { label: 'Mission', href: `${base}#vision` },
+    { label: '製品・技術', href: `${base}#technology` },
+    { label: '会社情報', href: `${base}#company` },
+    { label: 'チーム', href: `${base}#team` },
+    { label: 'ニュース', href: `${base}news` },
+  ],
+  en: [
+    { label: 'Mission', href: `${base}en/#vision` },
+    { label: 'Technology', href: `${base}en/#technology` },
+    { label: 'Company', href: `${base}en/#company` },
+    { label: 'Team', href: `${base}en/#team` },
+    { label: 'News', href: `${base}en/news` },
+  ]
+};
+
+const currentLinks = navLinks[lang as keyof typeof navLinks];
+const homeUrl = lang === 'en' ? `${base}en/` : base;
+const recruitUrl = lang === 'en' ? `${base}en/recruit` : `${base}recruit`;
+const contactUrl = lang === 'en' ? `${base}en/#contact` : `${base}#contact`;
+const langSwitchUrl = lang === 'en' ? base : `${base}en/`;
 ---
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -128,13 +150,13 @@ const navLinks = [
 >
   <div class="container mx-auto flex items-center justify-between px-4 py-3">
     <!-- Logo -->
-    <a href={base} class="flex items-center gap-2 font-bold text-xl tracking-tight nav-logo">
+    <a href={homeUrl} class="flex items-center gap-2 font-bold text-xl tracking-tight nav-logo">
       <img src={favicon} alt="NanoFrontier" class="h-8 w-8" />
       NanoFrontier
     </a>
     <!-- Menu (PC) -->
     <ul class="hidden md:flex gap-8 font-medium nav-menu">
-      {navLinks.map(link => (
+      {currentLinks.map(link => (
         <li>
           <a href={link.href} class="relative transition nav-link">
             {link.label}
@@ -145,8 +167,15 @@ const navLinks = [
     </ul>
     <!-- Actions (PC) -->
     <div class="hidden md:flex gap-2 nav-actions">
-      <a href={`${base}recruit`} class="px-4 py-1 rounded-full font-semibold transition nav-btn">採用情報</a>
-      <a href={`${base}#contact`} class="px-4 py-1 rounded-full font-semibold transition nav-btn">お問い合わせ</a>
+      <a href={langSwitchUrl} class="px-4 py-1 rounded-full font-semibold transition nav-btn">
+        {lang === 'en' ? '日本語' : 'English'}
+      </a>
+      <a href={recruitUrl} class="px-4 py-1 rounded-full font-semibold transition nav-btn">
+        {lang === 'en' ? 'Careers' : '採用情報'}
+      </a>
+      <a href={contactUrl} class="px-4 py-1 rounded-full font-semibold transition nav-btn">
+        {lang === 'en' ? 'Contact' : 'お問い合わせ'}
+      </a>
     </div>
     <!-- Mobile menu button -->
     <button id="mobile-menu-btn" class="md:hidden flex items-center text-[#04666c] transition-colors duration-300" aria-label="Open menu">
@@ -157,15 +186,22 @@ const navLinks = [
   </div>
   <!-- Mobile menu overlay -->
   <div id="mobile-menu-overlay" class="hidden fixed inset-0 z-50 bg-[#04666c] flex flex-col items-center justify-center transition-all duration-300 md:hidden" style="min-height: 100dvh;">
-    <!-- 閉じるボタン -->
+    <!-- Close button -->
     <button id="mobile-menu-close" class="absolute top-4 right-4 text-3xl text-white p-2 rounded-full hover:bg-white/10" aria-label="Close menu">&times;</button>
-    <!-- メニュー本体 -->
+    <!-- Menu content -->
     <nav class="flex flex-col gap-8 items-center w-full">
-      {navLinks.map(link => (
+      {currentLinks.map(link => (
         <a href={link.href} class="text-2xl font-bold text-white w-full text-center py-3 hover:bg-white/10 rounded transition">{link.label}</a>
       ))}
-      <a href={`${base}recruit`} class="w-4/5 text-center px-4 py-3 rounded-full font-semibold bg-white text-[#04666c] nav-btn text-lg mt-4">採用情報</a>
-      <a href={`${base}#contact`} class="w-4/5 text-center px-4 py-3 rounded-full font-semibold bg-white text-[#04666c] nav-btn text-lg">お問い合わせ</a>
+      <a href={langSwitchUrl} class="w-4/5 text-center px-4 py-3 rounded-full font-semibold bg-white text-[#04666c] nav-btn text-lg mt-4">
+        {lang === 'en' ? '日本語' : 'English'}
+      </a>
+      <a href={recruitUrl} class="w-4/5 text-center px-4 py-3 rounded-full font-semibold bg-white text-[#04666c] nav-btn text-lg">
+        {lang === 'en' ? 'Careers' : '採用情報'}
+      </a>
+      <a href={contactUrl} class="w-4/5 text-center px-4 py-3 rounded-full font-semibold bg-white text-[#04666c] nav-btn text-lg">
+        {lang === 'en' ? 'Contact' : 'お問い合わせ'}
+      </a>
     </nav>
   </div>
 </nav>
