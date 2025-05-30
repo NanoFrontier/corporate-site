@@ -7,23 +7,46 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  keywords?: string;
+  lang?: string;
+  alternateUrls?: {
+    en: string;
+    ja: string;
+  };
 }
 
 const { 
   title,
   description = "NanoFrontier株式会社は、ナノ粒子化技術を用いて、さまざまな分野の課題解決に取り組んでいます。",
-  image = "/images/ogp-default.jpg"
+  image = "/images/ogp-default.jpg",
+  keywords = "ナノ粒子,ナノテクノロジー,再沈殿法",
+  lang = "ja",
+  alternateUrls
 } = Astro.props;
 
 const siteUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
-<html lang="ja">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={siteUrl} />
+
+    {alternateUrls && (
+      <>
+        <link rel="alternate" hreflang="ja" href={alternateUrls.ja} />
+        <link rel="alternate" hreflang="en" href={alternateUrls.en} />
+        <link rel="alternate" hreflang="x-default" href={alternateUrls.en} />
+      </>
+    )}
     
     <!-- OGP設定 -->
     <meta property="og:title" content={title} />
@@ -32,11 +55,30 @@ const siteUrl = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={siteUrl} />
     <meta property="og:image" content={new URL(image, siteUrl)} />
     <meta property="og:site_name" content="NanoFrontier" />
+    <meta property="og:locale" content={lang === "ja" ? "ja_JP" : "en_US"} />
+    {alternateUrls && <meta property="og:locale:alternate" content={lang === "ja" ? "en_US" : "ja_JP"} />}
+    
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, siteUrl)} />
     
     <!-- その他のメタタグ -->
     <link rel="icon" type="image/svg+xml" href={favicon} />
     <link rel="stylesheet" href="/src/styles/globals.css" />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "NanoFrontier",
+        "url": {siteUrl},
+        "logo": {new URL(image, siteUrl)},
+        "description": {description}
+      }
+    </script>
   </head>
   <body>
     <Nav />
