@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const newsEntries = await getCollection('news', ({ id }) => id.startsWith('ja/'));
+  return newsEntries.map(entry => ({
+    params: { slug: entry.slug.replace('ja/', '') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout
+  title={`${entry.data.title} | NanoFrontier - ナノフロンティア`}
+  description={entry.data.summary}
+  lang="ja"
+  alternateUrls={{
+    "en": "https://nanofrontier.co.jp/en/news/",
+    "ja": "https://nanofrontier.co.jp/news/"
+  }}
+>
+  <main class="container mx-auto px-4 py-12 pt-24">
+    <article class="prose prose-lg max-w-none">
+      <div class="text-gray-500 mb-4">{entry.data.date}</div>
+      <h1 class="text-4xl font-bold mb-8" style="color:#04666c">{entry.data.title}</h1>
+      <div class="bg-white rounded-xl border border-gray-200 shadow p-8">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout> 

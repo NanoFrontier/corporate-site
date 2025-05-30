@@ -4,7 +4,6 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   output: 'static',
-  // base: '/corporate-site/',   ← これを消す or '/' に変更
-  site: 'https://nanofrontier.jp', // SEO 用に追加しておくと吉
+  site: 'https://nanofrontier.jp',
   integrations: [tailwind()],
 });

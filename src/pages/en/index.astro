@@ -1,0 +1,258 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import seiya_inoue from '../../images/seiya_inoue.jpg?url';
+import kouki_oka from '../../images/kouki_oka.jpg?url';
+import hero_bg2 from '../../images/hero-bg2.mp4?url';
+import hero_bg_image from '../../images/hero-bg.png?url';
+
+interface NewsItem {
+  slug: string;
+  data: {
+    title: string;
+    date: string;
+    summary: string;
+  };
+}
+
+const base = import.meta.env.BASE_URL;
+
+const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .slice(0, 3)
+  .map(news => ({
+    ...news,
+    slug: news.slug.replace('en/', '')
+  }));
+
+// Once content collections are working, use this:
+// const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
+//   .sort((a, b) => b.data.date.localeCompare(a.data.date))
+//   .slice(0, 3);
+---
+
+<Layout 
+  title="NanoFrontier - Pioneering Nanoparticle Technology"
+  description="NanoFrontier Inc. develops innovative solutions using nanoparticle technology. Our proprietary reprecipitation method enables stable nanoparticle formation of compounds, providing revolutionary solutions in environmental monitoring, energy storage, and pharmaceutical development."
+  image="/images/ogp-default.jpg"
+  keywords="NanoFrontier,NanoFrontier nanoparticle manufacturing,nanoparticle technology,reprecipitation method,Ligand-Assisted Reduction & Re-Precipitation,LARR,Flash Nanoprecipitation,FNP,Microfluidic reprecipitation,Micro-Mixer Anti-Solvent Precipitation,Supercritical Antisolvent,SAS,Miniemulsion polymerization,Nanoemulsion,Inverse micelle method,Microwave-assisted synthesis,Hot injection method,Electrochemical reduction,Sol-gel method,Hydrothermal synthesis,Bead mill,Ball mill,Gas phase condensation,Laser ablation,Aerosol-Assisted CVD,Flame-Spray Synthesis,low-energy nanoparticle fabrication,continuous nanoparticle production,nanoparticle drug delivery,LNP vaccine,polymeric nanocarrier,organic dye nanoparticles,fluorescent probe,nanofilter,nanocoating,nanocatalyst,nanoparticle scale-up cost,green chemistry,SDGs water conservation,ESG chemical management,carbon neutral water treatment,Edge computing water quality,AI water quality sensor,nanoparticle reprecipitation method,ligand-assisted reprecipitation,flash nanoprecipitation,microfluidic nanoparticle synthesis,organic nanoparticle for sensing,high-sensitivity nanoparticle assay"
+  lang="en"
+  alternateUrls={{
+    "en": "https://nanofrontier.co.jp/en/",
+    "ja": "https://nanofrontier.co.jp/"
+  }}
+>
+  <!-- Hero Section -->
+  <section id="hero-section" class="relative min-h-screen w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex items-center justify-center overflow-hidden">
+    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-70">
+      <source src={hero_bg2} type="video/mp4" />
+      <img src={hero_bg_image} alt="NanoFrontier Hero" class="w-full h-full object-cover opacity-60" />
+    </video>
+    <div class="absolute inset-0 bg-black/20 pointer-events-none z-10"></div>
+    <div class="relative z-10 text-center text-white">
+      <h1 class="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">Nano Particles,<br />Huge Impact.</h1>
+      <p class="text-xl md:text-2xl font-semibold mb-2">Towards a society where all resources circulate smoothly and are utilized optimally</p>
+    </div>
+  </section>
+
+  <main class="container py-12 space-y-16 pt-20">
+    <div id="vision" class="container mx-auto px-4 scroll-mt-24">
+      <p class="text-2xl font-semibold mb-4" style="color: #04666c;">Continuously commercializing breakthrough technologies at unprecedented low costs</p>
+      <div class="text-gray-700 space-y-4">
+        <p>We focus on simple and affordable technologies accessible to everyone, rather than expensive and complex solutions limited to a select few.</p>
+        <p>We prioritize practical problem-solving over theoretical technology, constantly identifying and commercializing solutions that society truly needs.</p>
+      </div>
+    </div>
+
+    <!-- Technology -->
+    <div id="technology" class="container mx-auto px-4 scroll-mt-24">
+      <h2 class="text-2xl font-bold mb-2" style="color:#04666c">Technology & Products</h2>
+      <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
+      <div class="mb-4 font-semibold text-lg">
+        Solving diverse challenges through compound nanoparticle technology.
+      </div>
+      <p class="mb-6 text-gray-700">
+        Our improved reprecipitation method, developed at Tohoku University, achieves stable nanoparticle formation of compounds that was previously challenging. 
+        The dispersion, miniaturization, and increased surface area of nanoparticles in solution enable property enhancement and new applications.
+      </p>
+
+      <!-- Technology Section -->
+      <section class="mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
+            <h4 class="font-bold text-lg mb-2" style="color:#04666c">Proprietary Reprecipitation Technology</h4>
+            <p class="text-gray-700 mb-2">Precise control of compound particle size at nanometer scale.</p>
+            <ul class="list-disc pl-5 text-gray-700 text-sm space-y-1">
+              <li>High dispersibility & sensing sensitivity</li>
+              <li>Compatible with various organic materials</li>
+            </ul>
+          </div>
+          <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
+            <h4 class="font-bold text-lg mb-2" style="color:#04666c">Nanoparticle Properties</h4>
+            <p class="text-gray-700 mb-2">Achieving nanoparticles with high dispersibility and stability.</p>
+            <ul class="list-disc pl-5 text-gray-700 text-sm space-y-1">
+              <li>Ideal for high-sensitivity sensing applications</li>
+              <li>Easy mass production & scale-up</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Application Cases -->
+      <section>
+        <h3 class="text-lg font-bold mb-4">Solutions</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
+            <h4 class="font-bold text-lg mb-2" style="color:#04666c">Real-time Detection of Trace Contaminants in Water</h4>
+            <p class="text-gray-700 text-sm">
+              By nanoparticulating organic dyes that were previously insoluble in water and dispersing them, it is possible to react with target compounds and achieve highly sensitive detection even in aqueous environments.<br>
+              <span class="font-bold">Enables real-time detection and monitoring of trace contaminants in the environment.</span>
+            </p>
+          </div>
+          <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
+            <h4 class="font-bold text-lg mb-2" style="color:#04666c">Next-Generation High-Voltage, Low-Cost Battery Development</h4>
+            <p class="text-gray-700 text-sm">
+              Utilizing charged organic nanoparticles in electrolytes prevents unnecessary ion crossover through ion exchange membranes, enabling cost reduction and leakage prevention.<br>
+              <span class="font-bold">Contributes to the development of next-generation high-voltage, low-cost batteries.</span>
+            </p>
+          </div>
+          <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
+            <h4 class="font-bold text-lg mb-2" style="color:#04666c">Coolant Performance Enhancement</h4>
+            <p class="text-gray-700 text-sm">
+              Adding nanoparticles at high concentrations to coolants increases thermal conductivity by breaking boundary layers while maintaining viscosity.<br>
+              <span class="font-bold">Significantly improves heat dissipation and cooling efficiency.</span>
+            </p>
+          </div>
+          <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
+            <h4 class="font-bold text-lg mb-2" style="color:#04666c">Safe and Cost-Effective Hydrogen Transport</h4>
+            <p class="text-gray-700 text-sm">
+              In high-temperature dehydrogenation reactions, using nanoparticulated catalysts and thermal conductive fillers reduces the required temperature and reaction time, minimizing energy loss and enabling safer, more cost-effective hydrogen transport.
+            </p>
+          </div>
+          <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
+            <h4 class="font-bold text-lg mb-2" style="color:#04666c">Reducing Side Effects of Anti-Cancer Drugs</h4>
+            <p class="text-gray-700 text-sm">
+              By nanoparticulating anti-cancer drugs and imparting water solubility without carriers, the particles can pass through gaps in tumor vasculature and selectively accumulate at the target site.<br>
+              <span class="font-bold">Enables drug delivery with reduced side effects.</span>
+            </p>
+          </div>
+          <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6">
+            <h4 class="font-bold text-lg mb-2" style="color:#04666c">+ Custom Solutions</h4>
+            <p class="text-gray-700 text-sm">
+              We propose optimal solutions utilizing nanoparticle technology tailored to your specific needs and challenges. Please feel free to contact us.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="my-12">
+        <h3 class="text-lg font-bold mb-4">Partnership Models</h3>
+        <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-8 mx-auto">
+          <ul class="list-disc pl-8 text-gray-700 space-y-4">
+            <li><span class="font-bold text-[#04666c]">Reagent Development, Manufacturing & Sales:</span> From research and development to nanoparticle production of samples</li>
+            <li><span class="font-bold text-[#04666c]">Contract Nanoparticle Manufacturing:</span> Nanoparticle processing of provided samples</li>
+            <li><span class="font-bold text-[#04666c]">Licensing & Consulting:</span> Nanoparticle technology licensing and technical support</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- Company -->
+    <div id="company" class="container mx-auto px-4 scroll-mt-24">
+      <h2 class="text-3xl font-bold mb-4" style="color:#04666c">Company Profile</h2>
+      <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
+      <div class="flex justify-center">
+        <div class="w-full bg-white/90 shadow-xl rounded-2xl border border-gray-200 overflow-hidden">
+          <table class="w-full border-collapse">
+            <tbody>
+              <tr class="border-b">
+                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 w-40 text-left">Company Name</th>
+                <td class="py-3 px-5">NanoFrontier, Inc.</td>
+              </tr>
+              <tr class="border-b">
+                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Location</th>
+                <td class="py-3 px-5">Urban Net Sendai Chuo Building 2F, 4-4-19 Chuo, Aoba-ku, Sendai, Miyagi, Japan</td>
+              </tr>
+              <tr class="border-b bg-gray-50">
+                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Established</th>
+                <td class="py-3 px-5">April 7, 2025</td>
+              </tr>
+              <tr class="border-b">
+                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Capital</th>
+                <td class="py-3 px-5">1.5 million yen</td>
+              </tr>
+              <tr class="border-b bg-gray-50">
+                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Representative</th>
+                <td class="py-3 px-5">Seiya Inoue</td>
+              </tr>
+              <tr>
+                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left align-top">Business Description</th>
+                <td class="py-3 px-5 whitespace-pre-line">
+                  (1) Research, development, manufacturing, and sales of reagents and functional materials using organic nanoparticle technology<br>
+                  (2) Contract manufacturing of organic nanoparticles and provision of related technologies<br>
+                  (3) Technology licensing and technical consulting in the field of organic nanoparticle technology<br>
+                  (4) All business activities related to the above
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team -->
+    <div id="team" class="container mx-auto px-4 scroll-mt-24">
+      <h2 class="text-3xl font-bold mb-4" style="color:#04666c">Team</h2>
+      <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Member Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={seiya_inoue} alt="Seiya Inoue" class="w-28 h-28 rounded-full object-cover border-4 shadow-md mb-4" style="border-color:#04666c" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">Seiya Inoue</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">CEO</span>
+            <div class="text-gray-700 mb-8 text-left">Founded after experiences at AI startup, VC, and Microsoft.</div>
+            <ul class="list-disc pl-5 text-gray-700 text-sm text-left space-y-1">
+              <li>The University of Tokyo, Faculty of Agriculture - Total synthesis of novel organic compounds</li>
+              <li>The University of Tokyo, Graduate School - Protein reaction prediction using machine learning</li>
+              <li>Microsoft - Azure technical support</li>
+              <li>Founded Catalis Partners Group - AI application/SaaS development</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- News -->
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-extrabold mb-4" style="color:#04666c">News & Updates</h2>
+      <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
+      <div class="space-y-4 mb-4">
+        {newsList.map(news => (
+          <a href={`${base}en/news/${news.slug}`} class="block bg-white/90 rounded-xl border border-gray-100 shadow hover:shadow-lg transition-shadow p-4 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#04666c]" style="text-decoration:none;">
+            <div class="text-gray-500 text-sm mb-1">{news.data.date}</div>
+            <div class="font-semibold group-hover:underline" style="color:#04666c">{news.data.title}</div>
+            <div class="text-gray-700">{news.data.summary}</div>
+          </a>
+        ))}
+      </div>
+      <a href={`${base}en/news/`} class="hover:underline" style="color:#04666c">View All News →</a>
+    </div>
+
+    <!-- Contact -->
+    <div id="contact" class="container mx-auto px-4 scroll-mt-24">
+      <h2 class="text-3xl font-bold mb-4" style="color:#04666c">Contact</h2>
+      <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
+      <div class="max-w-2xl mx-auto">
+        <iframe
+          src="https://juicy-brazil-90f.notion.site/ebd/1f526dc08b4b80618f49fa7e860880f0"
+          width="100%"
+          height="600"
+          frameborder="0"
+          allowfullscreen
+          style="background: #fff; border-radius: 0.5rem;"
+        />
+      </div>
+    </div>
+  </main>
+</Layout> 

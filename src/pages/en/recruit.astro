@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+interface Position {
+  title: string;
+  requirements: string[];
+  responsibilities: string[];
+}
+
+const positions: Position[] = [
+  {
+    title: "Research & Development Engineer",
+    requirements: [
+      "Experience in organic chemistry, materials science, or related fields",
+      "Strong interest in nanoparticle technology and its applications",
+      "Ability to work independently and as part of a team",
+      "Japanese language skills (business level) preferred but not required"
+    ],
+    responsibilities: [
+      "Research and development of nanoparticle technology",
+      "Development of new applications and products",
+      "Collaboration with partners and clients",
+      "Documentation and reporting of research results"
+    ]
+  },
+  {
+    title: "Business Development Manager",
+    requirements: [
+      "Experience in business development or sales in technology/materials industry",
+      "Strong communication and negotiation skills",
+      "Understanding of technical concepts and ability to explain them to clients",
+      "Japanese language skills (business level) preferred but not required"
+    ],
+    responsibilities: [
+      "Develop and execute business strategies",
+      "Build and maintain relationships with clients and partners",
+      "Identify new business opportunities",
+      "Collaborate with technical team to understand and communicate product capabilities"
+    ]
+  }
+];
+---
+
+<Layout
+  title="Careers | NanoFrontier"
+  description="Join NanoFrontier and help us revolutionize nanotechnology. We're looking for talented individuals who share our vision of creating innovative solutions through nanoparticle technology."
+  lang="en"
+  alternateUrls={{
+    "en": "https://nanofrontier.co.jp/en/recruit/",
+    "ja": "https://nanofrontier.co.jp/recruit/"
+  }}
+>
+  <main class="min-h-screen bg-gray-50 py-12 pt-24">
+    <div class="max-w-2xl mx-auto px-4">
+      <h1 class="text-4xl font-extrabold mb-4 text-center" style="color:#04666c">Careers at NanoFrontier</h1>
+      <p class="text-lg text-center mb-10 text-gray-700">
+        At NanoFrontier, we're pioneering the future of nanotechnology.<br />
+        Join us in creating innovative solutions that make a real impact.
+      </p>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold mb-2" style="color:#04666c">Open Positions</h2>
+        <div class="w-12 h-1 rounded mb-4" style="background:#04666c"></div>
+        <ul class="space-y-4">
+          <li class="bg-white/90 rounded-xl border border-gray-100 shadow p-5">
+            <div class="font-semibold text-[#04666c]">Research & Development Engineer</div>
+            <div class="text-gray-700 text-sm">Research, development, and evaluation of organic nanoparticles and their applications</div>
+          </li>
+          <li class="bg-white/90 rounded-xl border border-gray-100 shadow p-5">
+            <div class="font-semibold text-[#04666c]">Business Development Manager</div>
+            <div class="text-gray-700 text-sm">Business planning, client development, and partnership management</div>
+          </li>
+          <li class="bg-white/90 rounded-xl border border-gray-100 shadow p-5">
+            <div class="font-semibold text-[#04666c]">Back Office Staff</div>
+            <div class="text-gray-700 text-sm">Accounting, HR, and general administrative tasks</div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold mb-2" style="color:#04666c">How to Apply</h2>
+        <div class="w-12 h-1 rounded mb-4" style="background:#04666c"></div>
+        <p class="text-gray-700 mb-4">Please use the form below to apply. Our team will contact you shortly.</p>
+        <div class="bg-white/90 rounded-xl border border-gray-100 shadow p-5">
+          <iframe
+            src="https://juicy-brazil-90f.notion.site/ebd/1f526dc08b4b80618f49fa7e860880f0"
+            width="100%"
+            height="400"
+            frameborder="0"
+            allowfullscreen
+            style="background: #fff; border-radius: 0.5rem;"
+          />
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout> 
