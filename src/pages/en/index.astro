@@ -5,6 +5,8 @@ import seiya_inoue from '../../images/seiya_inoue.jpg?url';
 import kouki_oka from '../../images/kouki_oka.jpg?url';
 import hero_bg2 from '../../images/hero-bg2.mp4?url';
 import hero_bg_image from '../../images/hero-bg.png?url';
+import kojima_nobuaki from '../../images/nobuaki_kojima.png?url';
+import katsuya_saito from '../../images/katsuya_saito.jpg?url';
 
 interface NewsItem {
   slug: string;
@@ -163,39 +165,41 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="flex justify-center">
         <div class="w-full bg-white/90 shadow-xl rounded-2xl border border-gray-200 overflow-hidden">
-          <table class="w-full border-collapse">
-            <tbody>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 w-40 text-left">Company Name</th>
-                <td class="py-3 px-5">NanoFrontier, Inc.</td>
-              </tr>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Location</th>
-                <td class="py-3 px-5">Urban Net Sendai Chuo Building 2F, 4-4-19 Chuo, Aoba-ku, Sendai, Miyagi, Japan</td>
-              </tr>
-              <tr class="border-b bg-gray-50">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Established</th>
-                <td class="py-3 px-5">April 7, 2025</td>
-              </tr>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Capital</th>
-                <td class="py-3 px-5">1.5 million yen</td>
-              </tr>
-              <tr class="border-b bg-gray-50">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Representative</th>
-                <td class="py-3 px-5">Seiya Inoue</td>
-              </tr>
-              <tr>
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left align-top">Business Description</th>
-                <td class="py-3 px-5 whitespace-pre-line">
-                  (1) Research, development, manufacturing, and sales of reagents and functional materials using organic nanoparticle technology<br>
-                  (2) Contract manufacturing of organic nanoparticles and provision of related technologies<br>
-                  (3) Technology licensing and technical consulting in the field of organic nanoparticle technology<br>
-                  (4) All business activities related to the above
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <tbody>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 w-[6.5rem] md:w-40 text-left text-sm md:text-base">Company Name</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">NanoFrontier Inc.</td>
+                </tr>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">Location</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">Urban Net Sendai Chuo Building 2F, 4-4-19 Chuo, Aoba-ku, Sendai, Miyagi, Japan</td>
+                </tr>
+                <tr class="border-b bg-gray-50">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">Established</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">April 7, 2025</td>
+                </tr>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">Capital</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">1.5 million yen</td>
+                </tr>
+                <tr class="border-b bg-gray-50">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">Representative</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">Seiya Inoue</td>
+                </tr>
+                <tr>
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left align-top text-sm md:text-base">Business Description</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">
+                    (1) Research, development, manufacturing, and sales of reagents and functional materials using organic nanoparticle technology<br>
+                    (2) Contract manufacturing of organic nanoparticles and provision of related technologies<br>
+                    (3) Technology licensing and technical consulting in the field of organic nanoparticle technology<br>
+                    (4) All business activities related to the above
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -207,17 +211,39 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Member Card -->
         <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
-          <img src={seiya_inoue} alt="Seiya Inoue" class="w-28 h-28 rounded-full object-cover border-4 shadow-md mb-4" style="border-color:#04666c" />
+          <img src={seiya_inoue} alt="Seiya Inoue" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
           <div class="text-center">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Seiya Inoue</div>
-            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">CEO</span>
-            <div class="text-gray-700 mb-8 text-left">Founded after experiences at AI startup, VC, and Microsoft.</div>
-            <ul class="list-disc pl-5 text-gray-700 text-sm text-left space-y-1">
-              <li>The University of Tokyo, Faculty of Agriculture - Total synthesis of novel organic compounds</li>
-              <li>The University of Tokyo, Graduate School - Protein reaction prediction using machine learning</li>
-              <li>Microsoft - Azure technical support</li>
-              <li>Founded Catalis Partners Group - AI application/SaaS development</li>
-            </ul>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">CEO</span>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>Completed Master's degree at the University of Tokyo's Faculty of Agriculture (Organic compound synthesis and Machine Learning research). Gained experience in AI development, real estate, and VC while studying. At Microsoft, engaged in Azure-based development support and technical sales. After working at Catalis Partners Group for AI application development, established NanoFrontier in April 2025 to commercialize Tohoku University's nanoparticle technology.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={katsuya_saito} alt="Katsuya Saito" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">Katsuya Saito</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Co-Founder</span>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>Graduate of Tottori University's Faculty of Engineering. Led app and SaaS development projects since university, gaining engineering experience at multiple SaaS companies. At DeNA, managed iOS/Android/server development and product management for car-sharing service Anyca. After working at Catalis Partners Group developing AI applications, co-founded NanoFrontier in April 2025.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Advisor Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={kojima_nobuaki} alt="Nobuaki Kojima" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">Nobuaki Kojima</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Advisor</span>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>Former Executive Vice President and CEO of Global Environmental & Infrastructure Business Development Group at Mitsubishi Corporation. After joining in 1974 and assignments in Malaysia and Iran, served as General Manager of Business Development Department and Innovation Center. Launched over 100 new ventures including Portugal's largest solar power plant, Spain's solar thermal power, European submarine power transmission, and Wing Corporation, establishing a 730-member organization. Previously served as advisor to major listed companies including Hitachi and SECOM, and as Special Advisor to the President's Office and Visiting Professor at Waseda University. Currently serves as advisor to multiple companies including Chodai Co., Ltd. and AI venture Wanderlust. Also serves as visiting researcher at Tohoku University and Waseda University.</p>
+            </div>
           </div>
         </div>
       </div>

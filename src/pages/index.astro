@@ -5,6 +5,8 @@ import seiya_inoue from '../images/seiya_inoue.jpg?url';
 import kouki_oka from '../images/kouki_oka.jpg?url';
 import hero_bg2 from '../images/hero-bg2.mp4?url';
 import hero_bg_image from '../images/hero-bg.png?url';
+import kojima_nobuaki from '../images/nobuaki_kojima.png?url';
+import katsuya_saito from '../images/katsuya_saito.jpg?url';
 const base = import.meta.env.BASE_URL;
 
 const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
@@ -197,43 +199,45 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="flex justify-center">
         <div class="w-full bg-white/90 shadow-xl rounded-2xl border border-gray-200 overflow-hidden">
-          <table class="w-full border-collapse">
-            <tbody>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 w-40 text-left">会社名</th>
-                <td class="py-3 px-5">NanoFrontier株式会社</td>
-              </tr>
-              <tr class="border-b bg-gray-50">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">英文社名</th>
-                <td class="py-3 px-5">NanoFrontier, Inc</td>
-              </tr>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">所在地</th>
-                <td class="py-3 px-5">宮城県仙台市青葉区中央4丁目4-19アーバンネット仙台中央ビル2Ｆ</td>
-              </tr>
-              <tr class="border-b bg-gray-50">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">設立</th>
-                <td class="py-3 px-5">2025年04月07日</td>
-              </tr>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">資本金</th>
-                <td class="py-3 px-5">150万円</td>
-              </tr>
-              <tr class="border-b bg-gray-50">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">代表者</th>
-                <td class="py-3 px-5">井上誠也</td>
-              </tr>
-              <tr>
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left align-top">事業内容</th>
-                <td class="py-3 px-5 whitespace-pre-line">
-                  (1)有機ナノ粒子化技術を用いた試薬品、機能性材料の研究開発、製造及び販売<br>
-                  (2)有機ナノ粒子の製造受託及び関連技術の提供<br>
-                  (3)有機ナノ粒子化技術分野における技術ライセンスの供与及び技術コンサルティング<br>
-                  (4)前各号に附帯関連する一切の事業
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <tbody>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 w-[6.5rem] md:w-40 text-left text-sm md:text-base">会社名</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">NanoFrontier株式会社</td>
+                </tr>
+                <tr class="border-b bg-gray-50">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">英文社名</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">NanoFrontier, Inc</td>
+                </tr>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">所在地</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">宮城県仙台市青葉区中央4丁目4-19アーバンネット仙台中央ビル2Ｆ</td>
+                </tr>
+                <tr class="border-b bg-gray-50">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">設立</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">2025年04月07日</td>
+                </tr>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">資本金</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">150万円</td>
+                </tr>
+                <tr class="border-b bg-gray-50">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">代表者</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">井上誠也</td>
+                </tr>
+                <tr>
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left align-top text-sm md:text-base">事業内容</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">
+                    (1)有機ナノ粒子化技術を用いた試薬品、機能性材料の研究開発、製造及び販売<br>
+                    (2)有機ナノ粒子の製造受託及び関連技術の提供<br>
+                    (3)有機ナノ粒子化技術分野における技術ライセンスの供与及び技術コンサルティング<br>
+                    (4)前各号に附帯関連する一切の事業
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -245,17 +249,39 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Member Card -->
         <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
-          <img src={seiya_inoue} alt="井上誠也" class="w-28 h-28 rounded-full object-cover border-4 shadow-md mb-4" style="border-color:#04666c" />
+          <img src={seiya_inoue} alt="井上誠也" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
           <div class="text-center">
-            <div class="font-bold text-2xl mb-1" style="color:#04666c">井上誠也</div>
-            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">CEO</span>
-            <div class="text-gray-700 mb-8 text-left">AI開発ベンチャー、VC、Microsoftでの経験を経て起業。</div>
-            <ul class="list-disc pl-5 text-gray-700 text-sm text-left space-y-1">
-              <li>東京大学農学部、新規有機化合物の全合成</li>
-              <li>東京大学大学院修士課程、機械学習を用いたタンパク質の反応予測</li>
-              <li>MicrosoftでAzure技術支援</li>
-              <li>Catalis Partners Group創業、AIアプリ/SaaS開発</li>
-            </ul>
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">井上 誠也</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">CEO</span>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>東京大学農学部・同大学院修士課程修了（有機化合物合成、機械学習研究）。在学中よりAI開発、不動産、VCでの経験を積み、Microsoft入社後はAzureを用いた開発支援と技術営業に従事。その後、AIアプリケーション開発を行うCatalis Partners Groupを経て、2025年4月に東北大学発のナノ粒子化技術の事業化を目指しNanoFrontierを創業。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={katsuya_saito} alt="斎藤克哉" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">斎藤 克哉</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Co-Founder</span>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>鳥取大学工学部卒業。在学中から新規アプリ・SaaS開発のリーダーを務め、複数のSaaS企業でエンジニアリング経験を積む。DeNAではカーシェアサービスAnycaのiOS/Android/サーバー開発およびプロダクトマネジメントを担当。その後、AIアプリケーション開発を行うCatalis Partners Groupを経て、2025年4月にNanoFrontierを共同創業。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Advisor Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={kojima_nobuaki} alt="小島信明" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">小島 信明</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">顧問</span>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>元三菱商事常務執行役員地球環境事業開発グループCEO。三菱商事では、1974年の入社後、マレーシア・イラン駐在を経て事業開発部長、イノベーションセンター長を歴任。世界最大級のポルトガル太陽光発電、スペイン太陽熱発電、欧州海底送電、水ing設立等のエネルギー・環境分野で100以上の新規事業を立ち上げ、730名体制の組織を確立。日立製作所／セコム等の上場企業顧問、早稲田大学総長室参与・客員教授を歴任。現在は長大顧問、AIベンチャーWanderlust他数社の顧問及び東北大学客員研究員、早稲田大学招聘研究員を務める。</p>
+            </div>
           </div>
         </div>
       </div>
