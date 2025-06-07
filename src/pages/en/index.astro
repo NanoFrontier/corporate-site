@@ -5,6 +5,8 @@ import seiya_inoue from '../../images/seiya_inoue.jpg?url';
 import kouki_oka from '../../images/kouki_oka.jpg?url';
 import hero_bg2 from '../../images/hero-bg2.mp4?url';
 import hero_bg_image from '../../images/hero-bg.png?url';
+import kojima_nobuaki from '../../images/nobuaki_kojima.png?url';
+import katsuya_saito from '../../images/katsuya_saito.jpg?url';
 
 interface NewsItem {
   slug: string;
@@ -167,7 +169,7 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
             <tbody>
               <tr class="border-b">
                 <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 w-40 text-left">Company Name</th>
-                <td class="py-3 px-5">NanoFrontier, Inc.</td>
+                <td class="py-3 px-5">NanoFrontier Inc.</td>
               </tr>
               <tr class="border-b">
                 <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Location</th>
@@ -211,13 +213,35 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
           <div class="text-center">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Seiya Inoue</div>
             <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">CEO</span>
-            <div class="text-gray-700 mb-8 text-left">Founded after experiences at AI startup, VC, and Microsoft.</div>
-            <ul class="list-disc pl-5 text-gray-700 text-sm text-left space-y-1">
-              <li>The University of Tokyo, Faculty of Agriculture - Total synthesis of novel organic compounds</li>
-              <li>The University of Tokyo, Graduate School - Protein reaction prediction using machine learning</li>
-              <li>Microsoft - Azure technical support</li>
-              <li>Founded Catalis Partners Group - AI application/SaaS development</li>
-            </ul>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>Graduate of the University of Tokyo (Faculty of Agriculture and Master's Program). After gaining experience at an AI startup, real estate fund, and VC firm, joined Microsoft to support application developers using Azure PaaS/Serverless. Founded NanoFrontier in April 2025 to commercialize innovative nanoparticle technology from Tohoku University, aiming to create new value through the fusion of AI and nanotechnology.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={katsuya_saito} alt="Katsuya Saito" class="w-28 h-28 rounded-full object-cover border-4 shadow-md mb-4" style="border-color:#04666c" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">Katsuya Saito</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">Co-Founder</span>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>Graduate of Tottori University's Faculty of Engineering. Led app and SaaS development projects since university, later managed development of DeNA's car-sharing service Anyca. Co-founded the company through Catalis Partners Group.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Advisor Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={kojima_nobuaki} alt="Nobuaki Kojima" class="w-28 h-28 rounded-full object-cover border-4 shadow-md mb-4" style="border-color:#04666c" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">Nobuaki Kojima</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">Advisor</span>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>Former Executive Vice President and CEO of Global Environmental & Infrastructure Group at Mitsubishi Corporation. Launched over 100 new ventures including world-class renewable energy projects. Previously served as advisor to major listed companies including Hitachi and SECOM. Currently serves as advisor to Chodai Co., Ltd. and AI venture Wanderlust, while holding research positions at Tohoku University and Waseda University.</p>
+            </div>
           </div>
         </div>
       </div>

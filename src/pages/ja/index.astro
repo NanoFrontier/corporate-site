@@ -1,0 +1,10 @@
+---
+export const prerender = true;
+
+// リダイレクト先のURLを設定
+const redirectUrl = '/';
+
+// リダイレクトを実行
+Astro.response.headers.set('Location', redirectUrl);
+Astro.response.status = 301;
+--- 

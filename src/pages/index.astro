@@ -5,6 +5,8 @@ import seiya_inoue from '../images/seiya_inoue.jpg?url';
 import kouki_oka from '../images/kouki_oka.jpg?url';
 import hero_bg2 from '../images/hero-bg2.mp4?url';
 import hero_bg_image from '../images/hero-bg.png?url';
+import kojima_nobuaki from '../images/nobuaki_kojima.png?url';
+import katsuya_saito from '../images/katsuya_saito.jpg?url';
 const base = import.meta.env.BASE_URL;
 
 const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
@@ -249,13 +251,35 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
           <div class="text-center">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">井上誠也</div>
             <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">CEO</span>
-            <div class="text-gray-700 mb-8 text-left">AI開発ベンチャー、VC、Microsoftでの経験を経て起業。</div>
-            <ul class="list-disc pl-5 text-gray-700 text-sm text-left space-y-1">
-              <li>東京大学農学部、新規有機化合物の全合成</li>
-              <li>東京大学大学院修士課程、機械学習を用いたタンパク質の反応予測</li>
-              <li>MicrosoftでAzure技術支援</li>
-              <li>Catalis Partners Group創業、AIアプリ/SaaS開発</li>
-            </ul>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>東京大学農学部・同大学院修士課程修了。AI開発ベンチャー、不動産ファンド、VCでの経験を経て、Microsoftにて Azure PaaS/Serverless 活用したアプリケーション開発支援に従事。2025年4月、東北大学発のナノ粒子化技術の事業化を目指しNanoFrontierを創業。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={katsuya_saito} alt="斎藤克哉" class="w-28 h-28 rounded-full object-cover border-4 shadow-md mb-4" style="border-color:#04666c" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">斎藤克哉</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">Co-Founder</span>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>鳥取大学工学部在学中から新規アプリ・SaaS開発のリーダーを務め、DeNAではカーシェアサービスAnycaの開発を担当。その後、Catalis Partners Groupを経て当社を共同創業。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Advisor Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={kojima_nobuaki} alt="小島信明" class="w-28 h-28 rounded-full object-cover border-4 shadow-md mb-4" style="border-color:#04666c" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">小島信明</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">顧問</span>
+            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+              <p>元三菱商事常務執行役員 地球環境事業開発グループCEO。世界最大級の再生可能エネルギー事業を含む100以上の新規事業を立ち上げ。日立製作所／セコムなど上場企業顧問を歴任。現在は長大顧問、AIベンチャーwanderlust顧問他、東北大学客員研究員、早稲田大学招聘研究員を務める。</p>
+            </div>
           </div>
         </div>
       </div>
