@@ -199,43 +199,45 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="flex justify-center">
         <div class="w-full bg-white/90 shadow-xl rounded-2xl border border-gray-200 overflow-hidden">
-          <table class="w-full border-collapse">
-            <tbody>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 w-40 text-left">会社名</th>
-                <td class="py-3 px-5">NanoFrontier株式会社</td>
-              </tr>
-              <tr class="border-b bg-gray-50">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">英文社名</th>
-                <td class="py-3 px-5">NanoFrontier, Inc</td>
-              </tr>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">所在地</th>
-                <td class="py-3 px-5">宮城県仙台市青葉区中央4丁目4-19アーバンネット仙台中央ビル2Ｆ</td>
-              </tr>
-              <tr class="border-b bg-gray-50">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">設立</th>
-                <td class="py-3 px-5">2025年04月07日</td>
-              </tr>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">資本金</th>
-                <td class="py-3 px-5">150万円</td>
-              </tr>
-              <tr class="border-b bg-gray-50">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">代表者</th>
-                <td class="py-3 px-5">井上誠也</td>
-              </tr>
-              <tr>
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left align-top">事業内容</th>
-                <td class="py-3 px-5 whitespace-pre-line">
-                  (1)有機ナノ粒子化技術を用いた試薬品、機能性材料の研究開発、製造及び販売<br>
-                  (2)有機ナノ粒子の製造受託及び関連技術の提供<br>
-                  (3)有機ナノ粒子化技術分野における技術ライセンスの供与及び技術コンサルティング<br>
-                  (4)前各号に附帯関連する一切の事業
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <tbody>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 w-[6.5rem] md:w-40 text-left text-sm md:text-base">会社名</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">NanoFrontier株式会社</td>
+                </tr>
+                <tr class="border-b bg-gray-50">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">英文社名</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">NanoFrontier, Inc</td>
+                </tr>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">所在地</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">宮城県仙台市青葉区中央4丁目4-19アーバンネット仙台中央ビル2Ｆ</td>
+                </tr>
+                <tr class="border-b bg-gray-50">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">設立</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">2025年04月07日</td>
+                </tr>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">資本金</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">150万円</td>
+                </tr>
+                <tr class="border-b bg-gray-50">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">代表者</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">井上誠也</td>
+                </tr>
+                <tr>
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left align-top text-sm md:text-base">事業内容</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">
+                    (1)有機ナノ粒子化技術を用いた試薬品、機能性材料の研究開発、製造及び販売<br>
+                    (2)有機ナノ粒子の製造受託及び関連技術の提供<br>
+                    (3)有機ナノ粒子化技術分野における技術ライセンスの供与及び技術コンサルティング<br>
+                    (4)前各号に附帯関連する一切の事業
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

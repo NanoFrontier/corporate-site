@@ -165,39 +165,41 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="flex justify-center">
         <div class="w-full bg-white/90 shadow-xl rounded-2xl border border-gray-200 overflow-hidden">
-          <table class="w-full border-collapse">
-            <tbody>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 w-40 text-left">Company Name</th>
-                <td class="py-3 px-5">NanoFrontier Inc.</td>
-              </tr>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Location</th>
-                <td class="py-3 px-5">Urban Net Sendai Chuo Building 2F, 4-4-19 Chuo, Aoba-ku, Sendai, Miyagi, Japan</td>
-              </tr>
-              <tr class="border-b bg-gray-50">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Established</th>
-                <td class="py-3 px-5">April 7, 2025</td>
-              </tr>
-              <tr class="border-b">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Capital</th>
-                <td class="py-3 px-5">1.5 million yen</td>
-              </tr>
-              <tr class="border-b bg-gray-50">
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left">Representative</th>
-                <td class="py-3 px-5">Seiya Inoue</td>
-              </tr>
-              <tr>
-                <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-3 px-5 text-left align-top">Business Description</th>
-                <td class="py-3 px-5 whitespace-pre-line">
-                  (1) Research, development, manufacturing, and sales of reagents and functional materials using organic nanoparticle technology<br>
-                  (2) Contract manufacturing of organic nanoparticles and provision of related technologies<br>
-                  (3) Technology licensing and technical consulting in the field of organic nanoparticle technology<br>
-                  (4) All business activities related to the above
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <tbody>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 w-[6.5rem] md:w-40 text-left text-sm md:text-base">Company Name</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">NanoFrontier Inc.</td>
+                </tr>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">Location</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">Urban Net Sendai Chuo Building 2F, 4-4-19 Chuo, Aoba-ku, Sendai, Miyagi, Japan</td>
+                </tr>
+                <tr class="border-b bg-gray-50">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">Established</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">April 7, 2025</td>
+                </tr>
+                <tr class="border-b">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">Capital</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">1.5 million yen</td>
+                </tr>
+                <tr class="border-b bg-gray-50">
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left text-sm md:text-base">Representative</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">Seiya Inoue</td>
+                </tr>
+                <tr>
+                  <th class="bg-[#e6f3f4] text-[#04666c] font-semibold py-2 md:py-3 px-2 md:px-5 text-left align-top text-sm md:text-base">Business Description</th>
+                  <td class="py-2 md:py-3 px-2 md:px-5 text-sm md:text-base">
+                    (1) Research, development, manufacturing, and sales of reagents and functional materials using organic nanoparticle technology<br>
+                    (2) Contract manufacturing of organic nanoparticles and provision of related technologies<br>
+                    (3) Technology licensing and technical consulting in the field of organic nanoparticle technology<br>
+                    (4) All business activities related to the above
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
