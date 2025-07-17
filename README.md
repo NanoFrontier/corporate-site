@@ -33,20 +33,22 @@ npm run dev
 
 ## 開発フロー
 
+詳細なブランチ戦略とGitワークフローについては、[BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md)を参照してください。
+
+### 基本的な開発フロー
+
 1. 新しい機能や修正を開発する際は、`dev` ブランチから新しいブランチを作成
 ```bash
 git checkout dev
 git pull origin dev
 git checkout -b feature/your-feature-name
 ```
-
 2. 変更をコミットしてプッシュ
 ```bash
 git add .
-git commit -m "変更内容の説明"
+git commit -m "feat: 変更内容の説明"
 git push origin feature/your-feature-name
 ```
-
 3. GitHubでプルリクエストを作成
    - まず `dev` ブランチに向けてプルリクエストを作成
    - レビュー後に `dev` ブランチにマージ
@@ -92,20 +94,48 @@ corporate-site/
 
 ## 編集方法
 
-### 1. ニュースの追加
+### 1. ニュース記事の追加・編集（devブランチ経由推奨）
 
-1. `src/content/news/` ディレクトリに新しいMarkdownファイルを作成
-2. 以下の形式で記述：
+#### 基本的な手順
+1. **devブランチを選択**
+   - GitHub上で「dev」ブランチを選択
+2. **ファイルを編集**
+   - `src/content/news/ja/` フォルダで新しいファイルを作成
+   - ファイル名: `YYYY-MM-DD.md` 形式（例: `2025-01-15.md`）
+3. **テンプレートを利用**
+   - `src/content/news/templates/news-template-ja.md` を参考に記述
+4. **プルリクエスト作成**
+   - コミット後、「Compare & pull request」をクリック
+   - プルリクエストの詳細を入力
+5. **レビュー・マージ**
+   - レビュー完了後、「Merge pull request」をクリック
+   - 数分後にサイトに反映
 
+#### 記事の形式例
 ```markdown
 ---
-title: "ニュースのタイトル"
-date: "YYYY-MM-DD"
-summary: "ニュースの概要"
+title: "記事のタイトル"
+date: "2025-01-15"
+summary: "記事の要約（100字程度）"
 ---
 
-ニュースの本文
+# 記事のタイトル
+
+ここに記事の本文を書きます。
+
+## 見出し2
+
+段落を分ける場合は空行を入れます。
+
+### 見出し3
+
+- リスト項目1
+- リスト項目2
+
+**太字**や*斜体*も使えます。
 ```
+
+---
 
 ### 2. PDFの追加・更新
 
