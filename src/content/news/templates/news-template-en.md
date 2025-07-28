@@ -16,10 +16,6 @@ Write your article content here.
 
 [Link text](https://example.com)
 
-## Image Example
-
-![Image description](path/to/image.jpg)
-
 ## Quote Example
 
 > This is a quote.
