@@ -1,5 +1,5 @@
 ---
-title: "Article Title Here
+title: "Article Title Here"
 date: "YYYY-MM-DD"
 summary: "Enter article summary in about 10characters here."
 ---
