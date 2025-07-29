@@ -1,16 +1,29 @@
 ---
 title: "Article Title Here"
 date: "YYYY-MM-DD"
-summary: "Enter article summary in about 10characters here."
+summary: "Enter article summary in about 100 characters here."
 ---
+## Heading 1 (Actual Heading)
 
-# Article Title
+Add empty lines to separate paragraphs.
 
-Write your article content here.
+### Heading 2 (Sub Heading)
 
-## Heading 2Add empty lines to separate paragraphs.
+- List item 1
+  Description text should be properly indented
 
-### Heading 3List item1List item2- List item3You can use **bold** and *italic* text.
+- List item 2
+  Description text should be properly indented
+
+## Key-Value Pair Example
+
+**Event Name:** Event Name
+
+**Date:** YYYY-MM-DD
+
+**Venue:** Venue Name
+
+**Participation Fee:** Free
 
 ## Link Example
 
@@ -20,6 +33,12 @@ Write your article content here.
 
 > This is a quote.
 > It can span multiple lines.
+
+## Image Example
+
+![Image description](/images/news/example-image.jpg)
+
+You can use **bold** and *italic* text.
 
 ---
 
