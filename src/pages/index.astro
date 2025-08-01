@@ -53,8 +53,8 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
       </div>
 
     <!-- Technology -->
-      <div id="technology" class="container mx-auto px-4 scroll-mt-24">
-        <h2 class="text-2xl font-bold mb-2" style="color:#04666c">製品・技術</h2>
+      <div id="technology" class="container mx-auto px-4 scroll-mt-24 mt-16">
+        <h2 class="text-3xl font-bold mb-4" style="color:#04666c">製品・技術</h2>
         <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
 		<div class="mb-4 font-semibold text-lg">
             化合物のナノ粒子化技術で、さまざまな分野の課題を解決。
@@ -173,7 +173,7 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
         </section>
 
     <!-- Company -->
-    <div id="company" class="container mx-auto px-4 scroll-mt-24">
+    <div id="company" class="container mx-auto px-4 scroll-mt-24 mt-16">
       <h2 class="text-3xl font-bold mb-4" style="color:#04666c">会社概要</h2>
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="flex justify-center">
@@ -222,7 +222,7 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
     </div>
 
     <!-- Team -->
-    <div id="team" class="container mx-auto px-4 scroll-mt-24">
+    <div id="team" class="container mx-auto px-4 scroll-mt-24 mt-16">
       <h2 class="text-3xl font-bold mb-4" style="color:#04666c">チーム</h2>
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -295,8 +295,8 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
     </div>
 
     <!-- News -->
-    <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-extrabold mb-4" style="color:#04666c">ニュース・お知らせ</h2>
+    <div class="container mx-auto px-4 mt-16">
+      <h2 class="text-3xl font-bold mb-4" style="color:#04666c">ニュース・お知らせ</h2>
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="space-y-4 mb-4">
         {newsList.map(news => (
@@ -311,7 +311,7 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
     </div>
 
     <!-- Contact -->
-    <div id="contact" class="container mx-auto px-4 scroll-mt-24">
+    <div id="contact" class="container mx-auto px-4 scroll-mt-24 mt-16">
       <h2 class="text-3xl font-bold mb-4" style="color:#04666c">お問い合わせ</h2>
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="max-w-2xl mx-auto">
