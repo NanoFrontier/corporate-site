@@ -7,6 +7,7 @@ import hero_bg2 from '../../images/hero-bg2.mp4?url';
 import hero_bg_image from '../../images/hero-bg.png?url';
 import kojima_nobuaki from '../../images/nobuaki_kojima.png?url';
 import katsuya_saito from '../../images/katsuya_saito.jpg?url';
+import hitoshi_kasai from '../../images/hitoshi_kasai.jpg?url';
 
 interface NewsItem {
   slug: string;
@@ -215,34 +216,60 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
           <div class="text-center">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Seiya Inoue</div>
             <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">CEO</span>
-            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+            <div class="text-gray-700 text-left text-sm leading-relaxed">
               <p>Completed Master's degree at the University of Tokyo's Faculty of Agriculture (Organic compound synthesis and Machine Learning research). Gained experience in AI development, real estate, and VC while studying. At Microsoft, engaged in Azure-based development support and technical sales. After working at Catalis Partners Group for AI application development, established NanoFrontier in April 2025 to commercialize Tohoku University's nanoparticle technology.</p>
             </div>
           </div>
         </div>
 
-        <!-- Member Card -->
+        <!-- CTO Card -->
         <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
-          <img src={katsuya_saito} alt="Katsuya Saito" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <img src={kouki_oka} alt="Kouki Oka" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
           <div class="text-center">
-            <div class="font-bold text-2xl mb-1" style="color:#04666c">Katsuya Saito</div>
-            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Co-Founder</span>
-            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
-              <p>Graduate of Tottori University's Faculty of Engineering. Led app and SaaS development projects since university, gaining engineering experience at multiple SaaS companies. At DeNA, managed iOS/Android/server development and product management for car-sharing service Anyca. After working at Catalis Partners Group developing AI applications, co-founded NanoFrontier in April 2025.</p>
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">Kouki Oka Ph.D</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Co-Founder・CTO</span>
+            <div class="text-gray-700 text-left text-sm leading-relaxed">
+              <p>Associate Professor at Tohoku University Institute of Multidisciplinary Research for Advanced Materials. Focuses on innovative organic energy materials, developing amine polymers, researching next-generation battery electrolytes, pioneering organic solid catalysts, and designing environmentally friendly batteries. Also dedicated to developing precious metal alternative catalysts and biomass-based hydrogen production/storage technology. Has received 41 awards including the 11th Japan Society for the Promotion of Science Ikushi Prize (2021), 12th New Chemical Technology Research Encouragement Award (2023), and 30th Aoba Engineering Research Encouragement Award (2024). Co-founded NanoFrontier in April 2025 to commercialize Tohoku University's nanoparticle technology.</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Member Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={katsuya_saito} alt="Katsuya Saito" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">Katsuya Saito</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Co-Founder</span>
+            <div class="text-gray-700 text-left text-sm leading-relaxed">
+              <p>Graduate of Tottori University's Faculty of Engineering. Led app and SaaS development projects since university, gaining engineering experience at multiple SaaS companies. At DeNA, managed iOS/Android/server development and product management for car-sharing service Anyca. After working at Catalis Partners Group developing AI applications, co-founded NanoFrontier in April 2025.</p>
+            </div>
+          </div>
+        </div>
+
         <!-- Advisor Card -->
         <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
           <img src={kojima_nobuaki} alt="Nobuaki Kojima" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
           <div class="text-center">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Nobuaki Kojima</div>
             <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Advisor</span>
-            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+            <div class="text-gray-700 text-left text-sm leading-relaxed">
               <p>Former Executive Vice President and CEO of Global Environmental & Infrastructure Business Development Group at Mitsubishi Corporation. After joining in 1974 and assignments in Malaysia and Iran, served as General Manager of Business Development Department and Innovation Center. Launched over 100 new ventures including Portugal's largest solar power plant, Spain's solar thermal power, European submarine power transmission, and Wing Corporation, establishing a 730-member organization. Previously served as advisor to major listed companies including Hitachi and SECOM, and as Special Advisor to the President's Office and Visiting Professor at Waseda University. Currently serves as advisor to multiple companies including Chodai Co., Ltd. and AI venture Wanderlust. Also serves as visiting researcher at Tohoku University and Waseda University.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Technical Advisor Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={hitoshi_kasai} alt="Hitoshi Kasai" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">Hitoshi Kasai Ph.D</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Technical Advisor</span>
+            <div class="text-gray-700 text-left text-sm leading-relaxed">
+              <p>Professor at Tohoku University Institute of Multidisciplinary Research for Advanced Materials. Engaged in "Creation of Anti-Cancer Nano-Drugs and Their Pharmacological Effects," conducting comprehensive research including animal experiments on the anti-cancer activity of nano-drugs. In 1992, first systematized the reprecipitation method in a published paper, demonstrating the simple preparation of organic microcrystals. Since then, from 2004 at Tohoku University, has been working on "Establishment of Methods for Creating Multifunctional Nanomaterials Centered on Organic Nanocrystals," laying the foundation for mass production technology of nano-drugs.</p>
             </div>
           </div>
         </div>

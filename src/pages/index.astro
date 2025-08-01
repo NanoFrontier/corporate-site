@@ -7,6 +7,7 @@ import hero_bg2 from '../images/hero-bg2.mp4?url';
 import hero_bg_image from '../images/hero-bg.png?url';
 import kojima_nobuaki from '../images/nobuaki_kojima.png?url';
 import katsuya_saito from '../images/katsuya_saito.jpg?url';
+import hitoshi_kasai from '../images/hitoshi_kasai.jpg?url';
 const base = import.meta.env.BASE_URL;
 
 const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
@@ -253,38 +254,66 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
           <div class="text-center">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">井上 誠也</div>
             <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">CEO</span>
-            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+            <div class="text-gray-700 text-left text-sm leading-relaxed">
               <p>東京大学農学部・同大学院修士課程修了（有機化合物合成、機械学習研究）。在学中よりAI開発、不動産、VCでの経験を積み、Microsoft入社後はAzureを用いた開発支援と技術営業に従事。その後、AIアプリケーション開発を行うCatalis Partners Groupを経て、2025年4月に東北大学発のナノ粒子化技術の事業化を目指しNanoFrontierを創業。</p>
             </div>
           </div>
         </div>
 
-        <!-- Member Card -->
+        <!-- CTO Card -->
         <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
-          <img src={katsuya_saito} alt="斎藤克哉" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <img src={kouki_oka} alt="岡弘樹" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
           <div class="text-center">
-            <div class="font-bold text-2xl mb-1" style="color:#04666c">斎藤 克哉</div>
-            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Co-Founder</span>
-            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
-              <p>鳥取大学工学部卒業。在学中から新規アプリ・SaaS開発のリーダーを務め、複数のSaaS企業でエンジニアリング経験を積む。DeNAではカーシェアサービスAnycaのiOS/Android/サーバー開発およびプロダクトマネジメントを担当。その後、AIアプリケーション開発を行うCatalis Partners Groupを経て、2025年4月にNanoFrontierを共同創業。</p>
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">岡 弘樹 Ph.D</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">共同創業者・CTO</span>
+            <div class="text-gray-700 text-left text-sm leading-relaxed">
+              <p>東北大学多元物質科学研究所准教授。革新的有機エネルギー材料を軸に、アミンポリマーの開発、次世代電池の電解液研究、有機固体触媒の開拓、環境に優しい電池設計などに取り組み、貴金属代替の触媒開発や、バイオマスによる水素製造・貯蔵技術にも注力。日本学術振興会 第11回 育志賞（2021年）、第12回新化学技術研究奨励賞（2023年）、第30回青葉工学研究奨励賞（2024年）を含む計41件の奨励・発表賞を受賞。2025年4月に東北大学発のナノ粒子化技術の事業化を目指しNanoFrontierを共同創業。</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Member Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={katsuya_saito} alt="斎藤克哉" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">斎藤 克哉</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Co-Founder</span>
+            <div class="text-gray-700 text-left text-sm leading-relaxed">
+              <p>鳥取大学工学部卒業。在学中から新規アプリ・SaaS開発のリーダーを務め、複数のSaaS企業でエンジニアリング経験を積む。DeNAではカーシェアサービスAnycaのiOS/Android/サーバー開発およびプロダクトマネジメントを担当。その後、AIアプリケーション開発を行うCatalis Partners Groupを経て、2025年4月にNanoFrontierを共同創業。</p>
+            </div>
+          </div>
+        </div>
+
         <!-- Advisor Card -->
         <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
           <img src={kojima_nobuaki} alt="小島信明" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
           <div class="text-center">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">小島 信明</div>
             <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">顧問</span>
-            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
+            <div class="text-gray-700 text-left text-sm leading-relaxed">
               <p>元三菱商事常務執行役員地球環境事業開発グループCEO。三菱商事では、1974年の入社後、マレーシア・イラン駐在を経て事業開発部長、イノベーションセンター長を歴任。世界最大級のポルトガル太陽光発電、スペイン太陽熱発電、欧州海底送電、水ing設立等のエネルギー・環境分野で100以上の新規事業を立ち上げ、730名体制の組織を確立。日立製作所／セコム等の上場企業顧問、早稲田大学総長室参与・客員教授を歴任。現在は長大顧問、AIベンチャーWanderlust他数社の顧問及び東北大学客員研究員、早稲田大学招聘研究員を務める。</p>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Technical Advisor Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+          <img src={hitoshi_kasai} alt="笠井均" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">笠井 均 Ph.D</div>
+            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">技術顧問</span>
+            <div class="text-gray-700 text-left text-sm leading-relaxed">
+              <p>東北大学多元物質科学研究所教授。「抗癌性ナノ薬剤の創製とその薬理効果」に従事し、ナノ薬剤の抗がん活性に関する動物実験も含めた全般的な研究を遂行中。1992年に発表した論文にて再沈殿法を初めて体系化し、有機微結晶の簡便な作製を実証。それ以降、2004年から東北大学にて「有機ナノ結晶を中心とする多元ナノ物質の作製法の確立」に従事し、ナノ薬剤の大量生産技術の基礎を固める。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
 
     <!-- News -->
