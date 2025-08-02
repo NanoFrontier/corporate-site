@@ -7,6 +7,7 @@ import hero_bg2 from '../../images/hero-bg2.mp4?url';
 import hero_bg_image from '../../images/hero-bg.png?url';
 import kojima_nobuaki from '../../images/nobuaki_kojima.png?url';
 import katsuya_saito from '../../images/katsuya_saito.jpg?url';
+import hitoshi_kasai from '../../images/hitoshi_kasai.jpg?url';
 
 interface NewsItem {
   slug: string;
@@ -67,8 +68,8 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
     </div>
 
     <!-- Technology -->
-    <div id="technology" class="container mx-auto px-4 scroll-mt-24">
-      <h2 class="text-2xl font-bold mb-2" style="color:#04666c">Technology & Products</h2>
+    <div id="technology" class="container mx-auto px-4 scroll-mt-24 mt-16">
+      <h2 class="text-3xl font-bold mb-4" style="color:#04666c">Technology & Products</h2>
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="mb-4 font-semibold text-lg">
         Solving diverse challenges through compound nanoparticle technology.
@@ -145,6 +146,35 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
             </p>
           </div>
         </div>
+        
+        <!-- Simple Overview -->
+        <div class="bg-white/90 rounded-2xl shadow border border-gray-100 p-6 mt-8">
+          <p class="text-gray-700 mb-6">
+            View our simple company overview document.<br>
+            For more detailed information and technical materials, please contact us through the inquiry form.
+          </p>
+                      <div class="flex justify-center iframe-container">
+              <iframe
+                src="https://drive.google.com/file/d/1Iti_R-uPPrsBKQDrwm46dtjHeNcStcm8/preview"
+                width="80%"
+                height="420px"
+                class="rounded-lg mb-4"
+                allow="autoplay"
+                style="border: none; overflow: hidden;"
+              ></iframe>
+            </div>
+          <div class="text-center">
+            <a 
+              href="#contact" 
+              class="inline-flex items-center px-6 py-3 bg-[#04666c] text-white rounded-lg hover:bg-[#035458] transition-colors"
+            >
+              <span>Request Detailed Information & Contact</span>
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
       </section>
 
       <section class="my-12">
@@ -160,7 +190,7 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
     </div>
 
     <!-- Company -->
-    <div id="company" class="container mx-auto px-4 scroll-mt-24">
+    <div id="company" class="container mx-auto px-4 scroll-mt-24 mt-16">
       <h2 class="text-3xl font-bold mb-4" style="color:#04666c">Company Profile</h2>
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="flex justify-center">
@@ -205,30 +235,67 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
     </div>
 
     <!-- Team -->
-    <div id="team" class="container mx-auto px-4 scroll-mt-24">
+    <div id="team" class="container mx-auto px-4 scroll-mt-24 mt-16">
       <h2 class="text-3xl font-bold mb-4" style="color:#04666c">Team</h2>
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Member Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center h-[520px]">
           <img src={seiya_inoue} alt="Seiya Inoue" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
-          <div class="text-center">
+          <div class="text-center flex flex-col h-full">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Seiya Inoue</div>
-            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">CEO</span>
-            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
-              <p>Completed Master's degree at the University of Tokyo's Faculty of Agriculture (Organic compound synthesis and Machine Learning research). Gained experience in AI development, real estate, and VC while studying. At Microsoft, engaged in Azure-based development support and technical sales. After working at Catalis Partners Group for AI application development, established NanoFrontier in April 2025 to commercialize Tohoku University's nanoparticle technology.</p>
+            <div class="flex justify-center mb-4">
+              <span class="inline bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-2 py-1 rounded-full shadow-sm" style="width: fit-content;">CEO</span>
+            </div>
+            <div class="text-gray-700 text-left text-sm leading-relaxed space-y-2 flex-grow">
+              <p>Completed Master's degree at the University of Tokyo's Faculty of Agriculture (Organic compound synthesis and Machine Learning research). Gained experience in AI development, real estate, and VC while studying. At Microsoft, engaged in Azure-based development support and technical sales.</p>
+              <p>After establishing Catalis Partners Group for AI application development, established NanoFrontier in April 2025 to commercialize Tohoku University's nanoparticle technology.</p>
             </div>
           </div>
         </div>
 
+        <!-- CTO Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center h-[520px]">
+          <img src={kouki_oka} alt="Kouki Oka" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center flex flex-col h-full">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">Kouki Oka Ph.D</div>
+            <div class="flex justify-center mb-4">
+              <span class="inline bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-2 py-1 rounded-full shadow-sm" style="width: fit-content;">Co-Founder・CTO</span>
+            </div>
+            <div class="text-gray-700 text-left text-sm leading-relaxed space-y-2 flex-grow">
+              <p>Associate Professor at Tohoku University Institute of Multidisciplinary Research for Advanced Materials. Focuses on innovative organic energy materials, developing amine polymers, researching next-generation battery electrolytes, pioneering organic solid catalysts, and designing environmentally friendly batteries. Also dedicated to developing precious metal alternative catalysts and biomass-based hydrogen production/storage technology.</p>
+              <p>Has received numerous awards including the 11th Japan Society for the Promotion of Science Ikushi Prize (2021), 12th New Chemical Technology Research Encouragement Award (2023), and Japan Adhesion Society Encouragement Award (2025). Co-founded NanoFrontier in April 2025 to commercialize Tohoku University's nanoparticle technology.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Member Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center h-[520px]">
           <img src={katsuya_saito} alt="Katsuya Saito" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
-          <div class="text-center">
+          <div class="text-center flex flex-col h-full">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Katsuya Saito</div>
-            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Co-Founder</span>
-            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
-              <p>Graduate of Tottori University's Faculty of Engineering. Led app and SaaS development projects since university, gaining engineering experience at multiple SaaS companies. At DeNA, managed iOS/Android/server development and product management for car-sharing service Anyca. After working at Catalis Partners Group developing AI applications, co-founded NanoFrontier in April 2025.</p>
+            <div class="flex justify-center mb-4">
+              <span class="inline bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-2 py-1 rounded-full shadow-sm" style="width: fit-content;">Co-Founder</span>
+            </div>
+            <div class="text-gray-700 text-left text-sm leading-relaxed space-y-2 flex-grow">
+              <p>Graduate of Tottori University's Faculty of Engineering. Led app and SaaS development projects since university, gaining engineering experience at multiple SaaS companies. At DeNA, managed iOS/Android/server development and product management for car-sharing service Anyca.</p>
+              <p>After working at Catalis Partners Group developing AI applications, co-founded NanoFrontier in April 2025.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Advisor Card -->
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center h-[520px]">
+          <img src={hitoshi_kasai} alt="Hitoshi Kasai" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center flex flex-col h-full">
+            <div class="font-bold text-2xl mb-1" style="color:#04666c">Hitoshi Kasai Ph.D</div>
+            <div class="flex justify-center mb-4">
+              <span class="inline bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-2 py-1 rounded-full shadow-sm" style="width: fit-content;">Technical Advisor</span>
+            </div>
+            <div class="text-gray-700 text-left text-sm leading-relaxed flex-grow">
+              <p>Professor at Tohoku University Institute of Multidisciplinary Research for Advanced Materials. Developing next-generation anti-cancer drugs using nanoparticle technology, conducting comprehensive research including animal experiments on the anti-cancer activity of nano-drugs. In 1992, first systematized the reprecipitation method in a published paper, demonstrating the simple preparation of organic microcrystals.</p>
             </div>
           </div>
         </div>
@@ -236,13 +303,16 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Advisor Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center">
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center h-[520px]">
           <img src={kojima_nobuaki} alt="Nobuaki Kojima" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
-          <div class="text-center">
+          <div class="text-center flex flex-col h-full">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Nobuaki Kojima</div>
-            <span class="inline-block bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-3 py-1 rounded-full mb-4 shadow-sm">Advisor</span>
-            <div class="text-gray-700 text-left space-y-4 text-sm leading-relaxed">
-              <p>Former Executive Vice President and CEO of Global Environmental & Infrastructure Business Development Group at Mitsubishi Corporation. After joining in 1974 and assignments in Malaysia and Iran, served as General Manager of Business Development Department and Innovation Center. Launched over 100 new ventures including Portugal's largest solar power plant, Spain's solar thermal power, European submarine power transmission, and Wing Corporation, establishing a 730-member organization. Previously served as advisor to major listed companies including Hitachi and SECOM, and as Special Advisor to the President's Office and Visiting Professor at Waseda University. Currently serves as advisor to multiple companies including Chodai Co., Ltd. and AI venture Wanderlust. Also serves as visiting researcher at Tohoku University and Waseda University.</p>
+            <div class="flex justify-center mb-4">
+              <span class="inline bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-2 py-1 rounded-full shadow-sm" style="width: fit-content;">Advisor</span>
+            </div>
+            <div class="text-gray-700 text-left text-sm leading-relaxed space-y-2 flex-grow">
+              <p>Former Executive Vice President and CEO of Global Environmental & Infrastructure Business Development Group at Mitsubishi Corporation. After joining in 1974 and assignments in Malaysia and Iran, served as General Manager of Business Development Department and Innovation Center. Launched over 100 new ventures including Portugal's largest solar power plant, Spain's solar thermal power, European submarine power transmission, and Wing Corporation, establishing a 730-member organization.</p>
+              <p>Previously served as advisor to major listed companies including Hitachi and SECOM, and as Special Advisor to the President's Office and Visiting Professor at Waseda University. Currently serves as advisor to multiple companies including Chodai Co., Ltd. and AI venture Wanderlust. Also serves as visiting researcher at Tohoku University and Waseda University.</p>
             </div>
           </div>
         </div>
@@ -250,8 +320,8 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
     </div>
 
     <!-- News -->
-    <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-extrabold mb-4" style="color:#04666c">News & Updates</h2>
+    <div class="container mx-auto px-4 mt-16">
+      <h2 class="text-3xl font-bold mb-4" style="color:#04666c">News & Updates</h2>
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="space-y-4 mb-4">
         {newsList.map(news => (
@@ -266,7 +336,7 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
     </div>
 
     <!-- Contact -->
-    <div id="contact" class="container mx-auto px-4 scroll-mt-24">
+    <div id="contact" class="container mx-auto px-4 scroll-mt-24 mt-16">
       <h2 class="text-3xl font-bold mb-4" style="color:#04666c">Contact</h2>
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="max-w-2xl mx-auto">
