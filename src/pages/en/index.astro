@@ -240,7 +240,7 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Member Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center h-[520px]">
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[520px] h-full">
           <img src={seiya_inoue} alt="Seiya Inoue" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
           <div class="text-center flex flex-col h-full">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Seiya Inoue</div>
@@ -255,7 +255,7 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
         </div>
 
         <!-- CTO Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center h-[520px]">
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[520px] h-full">
           <img src={kouki_oka} alt="Kouki Oka" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
           <div class="text-center flex flex-col h-full">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Kouki Oka Ph.D</div>
@@ -272,7 +272,7 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Member Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center h-[520px]">
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[520px] h-full">
           <img src={katsuya_saito} alt="Katsuya Saito" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
           <div class="text-center flex flex-col h-full">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Katsuya Saito</div>
@@ -287,7 +287,7 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
         </div>
 
         <!-- Technical Advisor Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center h-[520px]">
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[520px] h-full">
           <img src={hitoshi_kasai} alt="Hitoshi Kasai" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
           <div class="text-center flex flex-col h-full">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Hitoshi Kasai Ph.D</div>
@@ -303,7 +303,7 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('en/')))
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Advisor Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center h-[520px]">
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[520px] h-full">
           <img src={kojima_nobuaki} alt="Nobuaki Kojima" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
           <div class="text-center flex flex-col h-full">
             <div class="font-bold text-2xl mb-1" style="color:#04666c">Nobuaki Kojima</div>
