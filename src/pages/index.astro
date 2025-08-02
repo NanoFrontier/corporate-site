@@ -138,12 +138,12 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
               当社の技術や製品についての簡易紹介資料をご覧いただけます。<br>
               より詳細な情報や技術資料をご希望の方は、お問い合わせフォームよりご連絡ください。
             </p>
-            <div class="flex justify-center">
+            <div class="flex justify-center w-full">
               <iframe
                 src="https://drive.google.com/file/d/16f4HJfbWqBWRIhGiJHNdYhiEQkbYbtHc/preview#view=Fit&page=5"
-                width="80%"
-                height="420px"
-                class="rounded-lg mb-4"
+                width="100%"
+                height="200px"
+                class="rounded-lg mb-4 sm:h-[300px] md:h-[420px]"
                 allow="autoplay"
               ></iframe>
             </div>
@@ -227,10 +227,10 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Member Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[450px] h-full">
-          <img src={seiya_inoue} alt="井上誠也" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
-          <div class="text-center flex flex-col h-full">
-            <div class="font-bold text-2xl mb-1" style="color:#04666c">井上 誠也</div>
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[350px] sm:min-h-[400px] md:min-h-[450px] h-full">
+          <img src={seiya_inoue} alt="井上誠也" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center flex flex-col h-full w-full">
+            <div class="font-bold text-xl md:text-2xl mb-1" style="color:#04666c">井上 誠也</div>
             <div class="flex justify-center mb-4">
               <span class="inline bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-2 py-1 rounded-full shadow-sm" style="width: fit-content;">CEO</span>
             </div>
@@ -242,10 +242,10 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
         </div>
 
         <!-- CTO Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[450px] h-full">
-          <img src={kouki_oka} alt="岡弘樹" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
-          <div class="text-center flex flex-col h-full">
-            <div class="font-bold text-2xl mb-1" style="color:#04666c">岡 弘樹 Ph.D</div>
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[350px] sm:min-h-[400px] md:min-h-[450px] h-full">
+          <img src={kouki_oka} alt="岡弘樹" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center flex flex-col h-full w-full">
+            <div class="font-bold text-xl md:text-2xl mb-1" style="color:#04666c">岡 弘樹 Ph.D</div>
             <div class="flex justify-center mb-4">
               <span class="inline bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-2 py-1 rounded-full shadow-sm" style="width: fit-content;">共同創業者・CTO</span>
             </div>
@@ -259,10 +259,10 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Member Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[450px] h-full">
-          <img src={katsuya_saito} alt="斎藤克哉" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
-          <div class="text-center flex flex-col h-full">
-            <div class="font-bold text-2xl mb-1" style="color:#04666c">斎藤 克哉</div>
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[350px] sm:min-h-[400px] md:min-h-[450px] h-full">
+          <img src={katsuya_saito} alt="斎藤克哉" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center flex flex-col h-full w-full">
+            <div class="font-bold text-xl md:text-2xl mb-1" style="color:#04666c">斎藤 克哉</div>
             <div class="flex justify-center mb-4">
               <span class="inline bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-2 py-1 rounded-full shadow-sm" style="width: fit-content;">共同創業者</span>
             </div>
@@ -274,10 +274,10 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
         </div>
 
         <!-- Technical Advisor Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[450px] h-full">
-          <img src={hitoshi_kasai} alt="笠井均" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
-          <div class="text-center flex flex-col h-full">
-            <div class="font-bold text-2xl mb-1" style="color:#04666c">笠井 均 Ph.D</div>
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[350px] sm:min-h-[400px] md:min-h-[450px] h-full">
+          <img src={hitoshi_kasai} alt="笠井均" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center flex flex-col h-full w-full">
+            <div class="font-bold text-xl md:text-2xl mb-1" style="color:#04666c">笠井 均 Ph.D</div>
             <div class="flex justify-center mb-4">
               <span class="inline bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-2 py-1 rounded-full shadow-sm" style="width: fit-content;">技術顧問</span>
             </div>
@@ -291,10 +291,10 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <!-- Advisor Card -->
-        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[450px] h-full">
-          <img src={kojima_nobuaki} alt="小島信明" class="w-28 h-28 rounded-full object-cover shadow-md mb-4" />
-          <div class="text-center flex flex-col h-full">
-            <div class="font-bold text-2xl mb-1" style="color:#04666c">小島 信明</div>
+        <div class="bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col items-center min-h-[350px] sm:min-h-[400px] md:min-h-[450px] h-full">
+          <img src={kojima_nobuaki} alt="小島信明" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover shadow-md mb-4" />
+          <div class="text-center flex flex-col h-full w-full">
+            <div class="font-bold text-xl md:text-2xl mb-1" style="color:#04666c">小島 信明</div>
             <div class="flex justify-center mb-4">
               <span class="inline bg-[#e6f3f4] text-[#04666c] text-xs font-semibold px-2 py-1 rounded-full shadow-sm" style="width: fit-content;">顧問</span>
             </div>
@@ -329,13 +329,14 @@ const newsList = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
     <div id="contact" class="container mx-auto px-4 scroll-mt-24 mt-16">
       <h2 class="text-3xl font-bold mb-4" style="color:#04666c">お問い合わせ</h2>
       <div class="w-16 h-1 rounded mb-6" style="background:#04666c"></div>
-      <div class="max-w-2xl mx-auto">
+      <div class="max-w-2xl mx-auto w-full">
         <iframe
           src="https://juicy-brazil-90f.notion.site/ebd/1f526dc08b4b80618f49fa7e860880f0"
           width="100%"
-          height="600"
+          height="300"
           frameborder="0"
           allowfullscreen
+          class="sm:h-[450px] md:h-[600px]"
           style="background: #fff; border-radius: 0.5rem;"
         />
       </div>
