@@ -26,7 +26,7 @@ const navLinks = {
 
 const currentLinks = navLinks[lang as keyof typeof navLinks];
 const homeUrl = lang === 'en' ? `${base}en/` : base;
-const recruitUrl = lang === 'en' ? `${base}en/recruit` : `${base}recruit`;
+const recruitUrl = 'https://careers.nanofrontier.jp/';
 const contactUrl = lang === 'en' ? `${base}en/#contact` : `${base}#contact`;
 const langSwitchUrl = lang === 'en' ? base : `${base}en/`;
 ---
@@ -169,8 +169,11 @@ const langSwitchUrl = lang === 'en' ? base : `${base}en/`;
       <a href={langSwitchUrl} class="px-4 py-1 rounded-full font-semibold transition nav-btn">
         {lang === 'en' ? '日本語' : 'English'}
       </a>
-      <a href={recruitUrl} class="px-4 py-1 rounded-full font-semibold transition nav-btn">
+      <a href={recruitUrl} target="_blank" rel="noopener noreferrer" class="px-4 py-1 rounded-full font-semibold transition nav-btn flex items-center gap-1">
         {lang === 'en' ? 'Careers' : '採用情報'}
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+        </svg>
       </a>
       <a href={contactUrl} class="px-4 py-1 rounded-full font-semibold transition nav-btn">
         {lang === 'en' ? 'Contact' : 'お問い合わせ'}
@@ -195,8 +198,11 @@ const langSwitchUrl = lang === 'en' ? base : `${base}en/`;
       <a href={langSwitchUrl} class="w-4/5 text-center px-4 py-3 rounded-full font-semibold bg-white text-[#04666c] nav-btn text-lg mt-4">
         {lang === 'en' ? '日本語' : 'English'}
       </a>
-      <a href={recruitUrl} class="w-4/5 text-center px-4 py-3 rounded-full font-semibold bg-white text-[#04666c] nav-btn text-lg">
+      <a href={recruitUrl} target="_blank" rel="noopener noreferrer" class="w-4/5 text-center px-4 py-3 rounded-full font-semibold bg-white text-[#04666c] nav-btn text-lg flex items-center justify-center gap-2">
         {lang === 'en' ? 'Careers' : '採用情報'}
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+        </svg>
       </a>
       <a href={contactUrl} class="w-4/5 text-center px-4 py-3 rounded-full font-semibold bg-white text-[#04666c] nav-btn text-lg">
         {lang === 'en' ? 'Contact' : 'お問い合わせ'}
@@ -219,9 +225,7 @@ const langSwitchUrl = lang === 'en' ? base : `${base}en/`;
 #global-nav.is-hero .nav-actions,
 #global-nav.is-hero .nav-logo *,
 #global-nav.is-hero .nav-menu *,
-#global-nav.is-hero .nav-link *,
-#global-nav.is-hero .nav-btn *,
-#global-nav.is-hero .nav-actions * {
+#global-nav.is-hero .nav-link * {
   color: #fff !important;
   fill: #fff !important;
   background: transparent !important;
