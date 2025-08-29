@@ -98,6 +98,16 @@ const siteUrl = new URL(Astro.url.pathname, Astro.site);
         "description": {description}
       }
     </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PE0PEQMP0"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-4PE0PEQMP0');
+    </script>
   </head>
   <body>
     <Nav lang={lang} />
