@@ -60,7 +60,7 @@ const content = footerContent[lang as keyof typeof footerContent];
         <h4 class="text-lg font-semibold mb-4">{content.company}</h4>
         <ul class="space-y-2">
           <li>
-            <a href={lang === "ja" ? "/ja" : "/en"} class="text-gray-300 hover:text-white transition-colors">
+            <a href={lang === "ja" ? "/#company" : "/en/#company"} class="text-gray-300 hover:text-white transition-colors">
               {content.about}
             </a>
           </li>
@@ -78,7 +78,7 @@ const content = footerContent[lang as keyof typeof footerContent];
             </a>
           </li>
           <li>
-            <a href={`mailto:${content.email}`} class="text-gray-300 hover:text-white transition-colors">
+            <a href={lang === "ja" ? "/#contact" : "/en/#contact"} class="text-gray-300 hover:text-white transition-colors">
               {content.contact}
             </a>
           </li>
