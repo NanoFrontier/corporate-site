@@ -263,35 +263,68 @@ const driveId = extractDriveId(driveUrl);
           throw new Error('Drive ID not found');
         }
         
-        // 自前プロキシAPIを使用して純粋なPDFバイトを取得
-        const pdfUrl = `/api/drive-proxy?id=${encodeURIComponent(driveId)}`;
+        // 本番環境とローカル環境で異なるアプローチを試行
+        const pdfUrls = [
+          // 1. 自前プロキシAPI（ローカル環境）
+          `/api/drive-proxy?id=${encodeURIComponent(driveId)}`,
+          // 2. Google Drive直接アクセス（本番環境用）
+          `https://drive.google.com/uc?export=download&id=${driveId}`,
+          // 3. Google Drive API（APIキーがある場合）
+          `https://www.googleapis.com/drive/v3/files/${driveId}?alt=media`
+        ];
         
-        // workerSrcは既にloadPDFJSで設定済み
-        // pdfjsLib.GlobalWorkerOptions.workerSrc = '...';
+        let pdf = null;
+        let lastError = null;
         
-        // fetch→ArrayBuffer方式で確実にPDFを取得
-        const response = await fetch(pdfUrl, { 
-          cache: 'no-store'
-        });
-        
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        // 順番に試行
+        for (let i = 0; i < pdfUrls.length; i++) {
+          try {
+            console.log(`🔄 Trying PDF source ${i + 1}: ${pdfUrls[i]}`);
+            
+            const response = await fetch(pdfUrls[i], { 
+              cache: 'no-store',
+              mode: 'cors',
+              headers: {
+                'User-Agent': 'Mozilla/5.0 (compatible; PDF-Viewer/1.0)'
+              }
+            });
+            
+            if (!response.ok) {
+              throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            // Content-Typeを確認
+            const contentType = response.headers.get('content-type') || '';
+            if (!contentType.includes('application/pdf') && !contentType.includes('octet-stream')) {
+              const text = await response.text();
+              console.error('Non-PDF response sample:', text.slice(0, 200));
+              throw new Error('Non-PDF response');
+            }
+            
+            const arrayBuffer = await response.arrayBuffer();
+            
+            // ArrayBufferをUint8Arrayに変換してPDF.jsに渡す
+            pdf = await pdfjsLib.getDocument({
+              data: new Uint8Array(arrayBuffer)
+            }).promise;
+            
+            console.log(`✅ PDF loaded successfully from source ${i + 1}`);
+            break;
+            
+          } catch (error) {
+            console.warn(`❌ Source ${i + 1} failed:`, error);
+            lastError = error;
+            
+            // 最後の試行で失敗した場合
+            if (i === pdfUrls.length - 1) {
+              throw lastError;
+            }
+          }
         }
         
-        // Content-Typeを確認
-        const contentType = response.headers.get('content-type') || '';
-        if (!contentType.includes('application/pdf')) {
-          const text = await response.text();
-          console.error('Non-PDF response sample:', text.slice(0, 200));
-          throw new Error('Non-PDF response from proxy');
+        if (!pdf) {
+          throw new Error('All PDF sources failed');
         }
-        
-        const arrayBuffer = await response.arrayBuffer();
-        
-        // ArrayBufferをUint8Arrayに変換してPDF.jsに渡す
-        const pdf = await pdfjsLib.getDocument({
-          data: new Uint8Array(arrayBuffer)
-        }).promise;
         
         this.pdfDoc = pdf;
         this.totalPages = pdf.numPages;
@@ -302,13 +335,13 @@ const driveId = extractDriveId(driveUrl);
         this.renderPage();
         this.hideLoading();
         
-              } catch (error) {
-          console.error('PDF loading failed:', error);
-          console.log('🔄 Activating fallback mode...');
-          
-          // フォールバック: Google Driveの直接埋め込みを表示
-          this.showFallback();
-        }
+      } catch (error) {
+        console.error('PDF loading failed:', error);
+        console.log('🔄 Activating fallback mode...');
+        
+        // フォールバック: Google Driveの直接埋め込みを表示
+        this.showFallback();
+      }
     }
     
     extractDriveId() {
@@ -484,10 +517,10 @@ const driveId = extractDriveId(driveUrl);
                   </a>
                 </p>
                 <p class="text-xs text-gray-400">
-                  <a href="/api/drive-proxy?id=${driveId}" 
+                  <a href="https://drive.google.com/file/d/${driveId}/preview" 
                      target="_blank" 
                      class="text-purple-600 hover:underline">
-                    プロキシ経由で開く
+                    Google Driveで開く
                   </a>
                 </p>
               </div>
@@ -496,8 +529,10 @@ const driveId = extractDriveId(driveUrl);
           
           // iframeの読み込み確認
           const iframe = canvasContainer.querySelector('iframe');
-          iframe.onload = () => console.log('✅ Fallback iframe loaded successfully');
-          iframe.onerror = () => console.log('❌ Fallback iframe failed to load');
+          if (iframe) {
+            iframe.onload = () => console.log('✅ Fallback iframe loaded successfully');
+            iframe.onerror = () => console.log('❌ Fallback iframe failed to load');
+          }
         } else {
           console.error('❌ No Drive ID found for fallback');
         }
