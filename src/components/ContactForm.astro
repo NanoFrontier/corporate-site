@@ -1,0 +1,353 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<div class={`contact-form bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden ${className}`}>
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-[#04666c] to-[#035458] text-white p-6">
+    <div class="flex items-center space-x-4">
+      <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold">お問い合わせ</h3>
+        <p class="text-white/80 text-sm">お気軽にご連絡ください</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="p-6">
+    <form id="contact-form" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+            お名前 <span class="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#04666c] focus:border-transparent transition-colors"
+            placeholder="山田太郎"
+          />
+        </div>
+        
+        <div>
+          <label for="company" class="block text-sm font-medium text-gray-700 mb-2">
+            会社名・組織名
+          </label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#04666c] focus:border-transparent transition-colors"
+            placeholder="株式会社サンプル"
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+            メールアドレス <span class="text-red-500">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#04666c] focus:border-transparent transition-colors"
+            placeholder="example@company.com"
+          />
+        </div>
+        
+        <div>
+          <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+            電話番号
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#04666c] focus:border-transparent transition-colors"
+            placeholder="03-1234-5678"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="inquiry-type" class="block text-sm font-medium text-gray-700 mb-2">
+          お問い合わせ種別 <span class="text-red-500">*</span>
+        </label>
+        <select
+          id="inquiry-type"
+          name="inquiryType"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#04666c] focus:border-transparent transition-colors"
+        >
+          <option value="">選択してください</option>
+          <option value="business">ビジネスパートナーシップ</option>
+          <option value="technology">技術相談・技術サポート</option>
+          <option value="product">製品・サービスについて</option>
+          <option value="recruitment">採用について</option>
+          <option value="media">取材・メディア関連</option>
+          <option value="other">その他</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
+          件名 <span class="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#04666c] focus:border-transparent transition-colors"
+          placeholder="お問い合わせの件名を入力してください"
+        />
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+          お問い合わせ内容 <span class="text-red-500">*</span>
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows="6"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#04666c] focus:border-transparent transition-colors resize-vertical"
+          placeholder="お問い合わせの詳細を入力してください"
+        ></textarea>
+      </div>
+
+      <div class="flex items-start space-x-3">
+        <input
+          type="checkbox"
+          id="privacy"
+          name="privacy"
+          required
+          class="mt-1 h-4 w-4 text-[#04666c] focus:ring-[#04666c] border-gray-300 rounded"
+        />
+        <label for="privacy" class="text-sm text-gray-700">
+          <a href="/privacy" class="text-[#04666c] hover:underline">プライバシーポリシー</a>に同意し、
+          <a href="/terms" class="text-[#04666c] hover:underline">利用規約</a>に従ってお問い合わせいたします。
+          <span class="text-red-500">*</span>
+        </label>
+      </div>
+
+      <div class="flex justify-center">
+        <button
+          type="submit"
+          class="bg-[#04666c] hover:bg-[#035458] text-white px-8 py-4 rounded-lg font-semibold transition-colors flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          id="submit-btn"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+          </svg>
+          <span>お問い合わせを送信</span>
+        </button>
+      </div>
+    </form>
+
+    <!-- Success Message -->
+    <div id="success-message" class="hidden text-center py-8">
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">お問い合わせを送信しました</h3>
+      <p class="text-gray-600 mb-4">ありがとうございます。内容を確認の上、担当者よりご連絡いたします。</p>
+      <button
+        id="reset-form"
+        class="bg-[#04666c] hover:bg-[#035458] text-white px-6 py-2 rounded-lg transition-colors"
+      >
+        新しいお問い合わせ
+      </button>
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-message" class="hidden text-center py-8">
+      <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">送信に失敗しました</h3>
+      <p class="text-gray-600 mb-4">申し訳ございません。しばらく時間をおいて再度お試しください。</p>
+      <button
+        id="retry-form"
+        class="bg-[#04666c] hover:bg-[#035458] text-white px-6 py-2 rounded-colors"
+      >
+        再試行
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  class ContactForm {
+    constructor(container) {
+      this.container = container;
+      this.form = container.querySelector('#contact-form');
+      this.submitBtn = container.querySelector('#submit-btn');
+      this.successMessage = container.querySelector('#success-message');
+      this.errorMessage = container.querySelector('#error-message');
+      
+      this.init();
+    }
+    
+    init() {
+      this.bindEvents();
+    }
+    
+    bindEvents() {
+      this.form?.addEventListener('submit', (e) => this.handleSubmit(e));
+      
+      const resetBtn = this.container.querySelector('#reset-form');
+      const retryBtn = this.container.querySelector('#retry-form');
+      
+      resetBtn?.addEventListener('click', () => this.resetForm());
+      retryBtn?.addEventListener('click', () => this.showForm());
+    }
+    
+    async handleSubmit(e) {
+      e.preventDefault();
+      
+      if (this.submitBtn) {
+        this.submitBtn.disabled = true;
+        this.submitBtn.innerHTML = `
+          <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>
+          <span>送信中...</span>
+        `;
+      }
+      
+      try {
+        const formData = new FormData(this.form);
+        const data = Object.fromEntries(formData);
+        
+        // フォームデータの検証
+        if (!this.validateForm(data)) {
+          throw new Error('入力内容に不備があります');
+        }
+        
+        // 送信処理（実際の実装ではサーバーに送信）
+        await this.submitForm(data);
+        
+        this.showSuccess();
+        
+      } catch (error) {
+        console.error('Form submission failed:', error);
+        this.showError();
+      } finally {
+        if (this.submitBtn) {
+          this.submitBtn.disabled = false;
+          this.submitBtn.innerHTML = `
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            </svg>
+            <span>お問い合わせを送信</span>
+          `;
+        }
+      }
+    }
+    
+    validateForm(data) {
+      const required = ['name', 'email', 'inquiryType', 'subject', 'message'];
+      
+      for (const field of required) {
+        if (!data[field] || data[field].trim() === '') {
+          return false;
+        }
+      }
+      
+      // メールアドレスの形式チェック
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(data.email)) {
+        return false;
+      }
+      
+      return true;
+    }
+    
+    async submitForm(data) {
+      // 実際の実装では、ここでサーバーにデータを送信
+      // 例: fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) })
+      
+      // デモ用：2秒待機
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // 成功をシミュレート
+      return { success: true };
+    }
+    
+    showSuccess() {
+      this.form.style.display = 'none';
+      this.successMessage.classList.remove('hidden');
+      this.errorMessage.classList.add('hidden');
+    }
+    
+    showError() {
+      this.form.style.display = 'none';
+      this.errorMessage.classList.remove('hidden');
+      this.successMessage.classList.add('hidden');
+    }
+    
+    showForm() {
+      this.form.style.display = 'block';
+      this.successMessage.classList.add('hidden');
+      this.errorMessage.classList.add('hidden');
+    }
+    
+    resetForm() {
+      this.form.reset();
+      this.showForm();
+    }
+  }
+  
+  // Initialize contact forms
+  document.addEventListener('DOMContentLoaded', () => {
+    const forms = document.querySelectorAll('.contact-form');
+    forms.forEach(form => {
+      new ContactForm(form);
+    });
+  });
+</script>
+
+<style>
+  .contact-form {
+    transition: all 0.3s ease;
+  }
+  
+  .contact-form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* Form focus states */
+  .contact-form input:focus,
+  .contact-form textarea:focus,
+  .contact-form select:focus {
+    outline: none;
+    border-color: transparent;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .contact-form {
+      margin: 0 -1rem;
+      border-radius: 0;
+    }
+  }
+</style>
