@@ -269,12 +269,16 @@ const driveId = extractDriveId(driveUrl);
         const pdfUrls = [
           // 1. 自前プロキシAPI（ローカル環境）
           `/api/drive-proxy?id=${encodeURIComponent(driveId)}`,
-          // 2. Google Drive直接アクセス（本番環境用）
+          // 2. Google Drive直接アクセス（本番環境用、最も確実）
           `https://drive.google.com/uc?export=download&id=${driveId}`,
           // 3. Google Drive直接アクセス（代替URL）
           `https://drive.google.com/file/d/${driveId}/uc?export=download`,
           // 4. Google Drive直接アクセス（より確実な方法）
-          `https://drive.google.com/file/d/${driveId}/view?usp=sharing`
+          `https://drive.google.com/file/d/${driveId}/view?usp=sharing`,
+          // 5. Google Drive直接アクセス（最も確実な方法）
+          `https://drive.google.com/file/d/${driveId}/preview`,
+          // 6. Google Drive直接アクセス（新しい方法）
+          `https://drive.google.com/file/d/${driveId}/view`
         ];
         
         let pdf = null;
@@ -498,7 +502,7 @@ const driveId = extractDriveId(driveUrl);
         if (driveId) {
           console.log('🔄 Showing fallback for Drive ID:', driveId);
           
-          // Google Drive previewでPDFを表示
+          // Google Drive previewでPDFを表示（最も確実）
           const previewUrl = `https://drive.google.com/file/d/${driveId}/preview`;
           
           canvasContainer.innerHTML = `
@@ -506,8 +510,8 @@ const driveId = extractDriveId(driveUrl);
               <p class="text-gray-600 mb-4">PDFビューアーの読み込みに失敗しました</p>
               <p class="text-sm text-gray-500 mb-6">Google Driveで直接表示します</p>
               <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                <p class="text-xs text-gray-500 mb-2">📋 ファイルID: ${driveId}</p>
-                <p class="text-xs text-gray-500">🔗 共有リンク: <a href="${previewUrl}" target="_blank" class="text-blue-600 hover:underline">${previewUrl}</a></p>
+                <p class="text-xs text-gray-400">💡 共有設定が「リンクを知っている全員」になっているか確認してください</p>
+                <p class="text-xs text-gray-400">🚀 PDFビューアーを動作させるには、ファイルの共有設定を「全員」に変更してください</p>
               </div>
               <iframe 
                 src="${previewUrl}" 
@@ -522,7 +526,7 @@ const driveId = extractDriveId(driveUrl);
           `;
           
           // iframeの読み込み確認
-          const iframe = canvasContainer.querySelector('#canvas-container iframe');
+          const iframe = canvasContainer.querySelector('iframe');
           if (iframe) {
             iframe.onload = () => console.log('✅ Fallback iframe loaded successfully');
             iframe.onerror = () => console.log('❌ Fallback iframe failed to load');
