@@ -263,14 +263,18 @@ const driveId = extractDriveId(driveUrl);
           throw new Error('Drive ID not found');
         }
         
+        console.log('🚀 Starting PDF loading for Drive ID:', driveId);
+        
         // 本番環境とローカル環境で異なるアプローチを試行
         const pdfUrls = [
           // 1. 自前プロキシAPI（ローカル環境）
           `/api/drive-proxy?id=${encodeURIComponent(driveId)}`,
           // 2. Google Drive直接アクセス（本番環境用）
           `https://drive.google.com/uc?export=download&id=${driveId}`,
-          // 3. Google Drive API（APIキーがある場合）
-          `https://www.googleapis.com/drive/v3/files/${driveId}?alt=media`
+          // 3. Google Drive直接アクセス（代替URL）
+          `https://drive.google.com/file/d/${driveId}/uc?export=download`,
+          // 4. Google Drive直接アクセス（より確実な方法）
+          `https://drive.google.com/file/d/${driveId}/view?usp=sharing`
         ];
         
         let pdf = null;
@@ -295,6 +299,8 @@ const driveId = extractDriveId(driveUrl);
             
             // Content-Typeを確認
             const contentType = response.headers.get('content-type') || '';
+            console.log(`📄 Content-Type: ${contentType}`);
+            
             if (!contentType.includes('application/pdf') && !contentType.includes('octet-stream')) {
               const text = await response.text();
               console.error('Non-PDF response sample:', text.slice(0, 200));
@@ -302,6 +308,7 @@ const driveId = extractDriveId(driveUrl);
             }
             
             const arrayBuffer = await response.arrayBuffer();
+            console.log(`📦 ArrayBuffer size: ${arrayBuffer.byteLength} bytes`);
             
             // ArrayBufferをUint8Arrayに変換してPDF.jsに渡す
             pdf = await pdfjsLib.getDocument({
@@ -329,6 +336,8 @@ const driveId = extractDriveId(driveUrl);
         this.pdfDoc = pdf;
         this.totalPages = pdf.numPages;
         this.currentPage = Math.min(this.currentPage, this.totalPages);
+        
+        console.log(`📚 PDF loaded: ${this.totalPages} pages`);
         
         this.updatePageInfo();
         this.updateNavigation();
@@ -488,12 +497,20 @@ const driveId = extractDriveId(driveUrl);
         const driveId = this.extractDriveId();
         if (driveId) {
           console.log('🔄 Showing fallback for Drive ID:', driveId);
+          
+          // Google Drive previewでPDFを表示
+          const previewUrl = `https://drive.google.com/file/d/${driveId}/preview`;
+          
           canvasContainer.innerHTML = `
             <div class="text-center p-8">
               <p class="text-gray-600 mb-4">PDFビューアーの読み込みに失敗しました</p>
               <p class="text-sm text-gray-500 mb-6">Google Driveで直接表示します</p>
+              <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                <p class="text-xs text-gray-500 mb-2">📋 ファイルID: ${driveId}</p>
+                <p class="text-xs text-gray-500">🔗 共有リンク: <a href="${previewUrl}" target="_blank" class="text-blue-600 hover:underline">${previewUrl}</a></p>
+              </div>
               <iframe 
-                src="https://drive.google.com/file/d/${driveId}/preview" 
+                src="${previewUrl}" 
                 width="100%" 
                 height="600" 
                 frameborder="0"
@@ -501,34 +518,11 @@ const driveId = extractDriveId(driveUrl);
                 allowfullscreen
                 loading="lazy">
               </iframe>
-              <div class="mt-4 space-y-2">
-                <p class="text-xs text-gray-400">
-                  <a href="https://drive.google.com/file/d/${driveId}/view" 
-                     target="_blank" 
-                     class="text-blue-600 hover:underline">
-                    新しいタブで開く
-                  </a>
-                </p>
-                <p class="text-xs text-gray-400">
-                  <a href="https://drive.google.com/file/d/${driveId}/download" 
-                     target="_blank" 
-                     class="text-green-600 hover:underline">
-                    PDFをダウンロード
-                  </a>
-                </p>
-                <p class="text-xs text-gray-400">
-                  <a href="https://drive.google.com/file/d/${driveId}/preview" 
-                     target="_blank" 
-                     class="text-purple-600 hover:underline">
-                    Google Driveで開く
-                  </a>
-                </p>
-              </div>
             </div>
           `;
           
           // iframeの読み込み確認
-          const iframe = canvasContainer.querySelector('iframe');
+          const iframe = canvasContainer.querySelector('#canvas-container iframe');
           if (iframe) {
             iframe.onload = () => console.log('✅ Fallback iframe loaded successfully');
             iframe.onerror = () => console.log('❌ Fallback iframe failed to load');
