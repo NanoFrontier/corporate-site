@@ -7,24 +7,9 @@ interface Props {
 }
 
 const { title, description, driveUrl, className = "" } = Astro.props;
-
-// Google DriveのファイルIDを抽出
-function extractDriveId(url: string): string | null {
-  // 例: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
-  const m1 = url.match(/\/d\/([^/]+)/);
-  if (m1) return m1[1];
-  // 例: https://drive.google.com/open?id=FILE_ID
-  const m2 = url.match(/[?&]id=([^&]+)/);
-  if (m2) return m2[1];
-  // 例: 直接ID
-  if (/^[A-Za-z0-9_-]{20,}$/.test(url)) return url;
-  return null;
-}
-
-const driveId = extractDriveId(driveUrl);
 ---
 
-<div class={`pdf-viewer bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden mt-12 mb-12 ${className}`} data-drive-url={driveUrl}>
+<div class={`pdf-viewer bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden mt-12 mb-12 ${className}`}>
   <!-- Header -->
   <div class="bg-gradient-to-r from-[#04666c] to-[#035458] text-white p-4 sm:p-6">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -39,26 +24,11 @@ const driveId = extractDriveId(driveUrl);
           <p class="text-white/80 text-sm truncate">{description}</p>
         </div>
       </div>
-      <div class="flex items-center space-x-2 flex-shrink-0">
-        <a 
-          href={`https://drive.google.com/file/d/${driveId}/view`}
-          class="bg-white/20 hover:bg-white/30 text-white px-3 py-2 sm:px-4 sm:py-2 rounded-lg transition-colors flex items-center space-x-2 text-sm"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-          </svg>
-          <span>Driveで開く</span>
-        </a>
-      </div>
     </div>
   </div>
 
   <!-- PDF Viewer Container -->
   <div class="relative bg-gray-50" id="pdf-container">
-    <!-- Navigation Bar -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 bg-white border-b border-gray-200 gap-3 sm:gap-0">    
     <!-- PDF Canvas Container -->
     <div class="relative bg-white flex items-center justify-center min-h-[600px]" id="pdf-viewer">
       <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-gray-500" id="loading">
@@ -76,25 +46,6 @@ const driveId = extractDriveId(driveUrl);
           <div class="absolute right-0 top-0 bottom-0 w-1/3 cursor-pointer hover:bg-black/5 transition-colors" id="next-zone" title="次のページ"></div>
         </div>
       </div>
-      
-      <div class="hidden text-center text-gray-500" id="error">
-        <svg class="w-16 h-16 text-red-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-        </svg>
-        <p class="text-lg font-semibold mb-2">PDFの読み込みに失敗しました</p>
-        <p class="text-sm mb-4">ファイルの共有設定を確認してください</p>
-        <div class="space-y-2 text-xs">
-          <p>• Google Driveの共有設定が「リンクを知っている全員」になっているか確認</p>
-          <p>• ファイルが削除されていないか確認</p>
-          <p>• ネットワーク接続を確認</p>
-        </div>
-        <button 
-          class="mt-4 bg-[#04666c] hover:bg-[#035458] text-white px-4 py-2 rounded-lg transition-colors text-sm"
-          id="retry-button"
-        >
-          再試行
-        </button>
-      </div>
     </div>
     
     <!-- Progress Bar -->
@@ -102,61 +53,64 @@ const driveId = extractDriveId(driveUrl);
       <div class="h-full bg-[#04666c] transition-all duration-300" id="progress-bar" style="width: 0%"></div>
     </div>
   </div>
-     <!-- Page Navigation Section (Centered) -->
-   <div class="flex items-center justify-center space-x-3 sm:space-x-4 p-4 bg-white border-t border-gray-200">
-     <button 
-       class="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-       id="prev-page"
-       disabled
-     >
-       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-       </svg>
-     </button>
-     
-     <div class="flex items-center space-x-2">
-       <span class="text-sm text-gray-600">ページ:</span>
-       <span class="text-sm font-medium" id="current-page">1</span>
-       <span class="text-sm text-gray-400">/</span>
-       <span class="text-sm text-gray-600" id="total-pages">-</span>
-     </div>
-     
-     <button 
-       class="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-       id="next-page"
-     >
-       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-       </svg>
-     </button>
-   </div>
-</div>
+  
+  <!-- Page Navigation Section (Centered) -->
+  <div class="flex items-center justify-center space-x-3 sm:space-x-4 p-4 bg-white border-t border-gray-200">
+    <button 
+      class="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      id="prev-page"
+      disabled
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    
+    <div class="flex items-center space-x-2">
+      <span class="text-sm text-gray-600">ページ:</span>
+      <span class="text-sm font-medium" id="current-page">1</span>
+      <span class="text-sm text-gray-400">/</span>
+      <span class="text-sm text-gray-600" id="total-pages">-</span>
+    </div>
+    
+    <button 
+      class="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      id="next-page"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+  </div>
 </div>
 
 <script>
+  // PDF.jsの型定義
+  declare global {
+    interface Window {
+      pdfjsLib: any;
+    }
+  }
+
   class PDFViewer {
     private container: HTMLElement;
     private currentPage: number;
     private totalPages: number;
-    private rendering: boolean;
     private pdfDoc: any;
-    private fixedScale: number | null;
-    private isResized: boolean;
+    private touchStartX: number | null;
     
     constructor(container: HTMLElement) {
       this.container = container;
       this.currentPage = 1;
       this.totalPages = 0;
-      this.rendering = false;
       this.pdfDoc = null;
-      this.fixedScale = null;
-      this.isResized = false;
+      this.touchStartX = null;
       
       this.init();
     }
     
     async init() {
-      if (typeof pdfjsLib === 'undefined') {
+      if (typeof window.pdfjsLib === 'undefined') {
         await this.loadPDFJS();
       }
       
@@ -168,21 +122,7 @@ const driveId = extractDriveId(driveUrl);
       const cdnUrls = [
         'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js',
         'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js',
-        'https://cdnjs.cloudflare.com/ajax/libs/pdfjs-dist/3.11.174/build/pdf.min.js',
-        'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.10.111/build/pdf.min.js',
-        'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.min.js',
-        'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.15.349/build/pdf.min.js',
-        'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.14.305/build/pdf.min.js'
-      ];
-      
-      const workerUrls = [
-        'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js',
-        'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js',
-        'https://cdnjs.cloudflare.com/ajax/libs/pdfjs-dist/3.11.174/build/pdf.worker.min.js',
-        'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.10.111/build/pdf.worker.min.js',
-        'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.worker.min.js',
-        'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.15.349/build/pdf.worker.min.js',
-        'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.14.305/build/pdf.worker.min.js'
+        'https://cdnjs.cloudflare.com/ajax/libs/pdfjs-dist/3.11.174/build/pdf.min.js'
       ];
       
       for (let i = 0; i < cdnUrls.length; i++) {
@@ -191,25 +131,12 @@ const driveId = extractDriveId(driveUrl);
           await this.loadScript(cdnUrls[i]);
           console.log(`PDF.js loaded successfully from CDN ${i + 1}`);
           
-          console.log(`Loading worker from: ${workerUrls[i]}`);
-          await this.loadScript(workerUrls[i]);
-          console.log(`PDF.js worker loaded successfully from CDN ${i + 1}`);
+          // Workerの設定
+          const workerSrc = cdnUrls[i].replace('pdf.min.js', 'pdf.worker.min.js');
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
+          console.log('Worker configured:', workerSrc);
           
-                  // PDF.jsの読み込み確認
-        if (typeof pdfjsLib !== 'undefined') {
-          console.log('✅ pdfjsLib is available:', typeof pdfjsLib);
-          console.log('✅ pdfjsLib version:', pdfjsLib.version);
-          
-          // Workerの設定を確実に行う
-          const workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.js`;
-          pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-          console.log('✅ Worker configured:', workerSrc);
-          console.log('✅ GlobalWorkerOptions:', pdfjsLib.GlobalWorkerOptions);
-        } else {
-          console.error('❌ pdfjsLib is not available');
-        }
-          
-          return; // 成功したら終了
+          return;
         } catch (error) {
           console.warn(`CDN ${i + 1} failed:`, error);
           if (i === cdnUrls.length - 1) {
@@ -219,36 +146,18 @@ const driveId = extractDriveId(driveUrl);
       }
     }
     
-    loadScript(src) {
-      return new Promise((resolve, reject) => {
+    loadScript(src: string) {
+      return new Promise<void>((resolve, reject) => {
         const script = document.createElement('script');
         script.src = src;
         
         script.onload = () => {
-          console.log(`✅ Script loaded successfully: ${src}`);
+          console.log(`Script loaded successfully: ${src}`);
           resolve();
         };
         
         script.onerror = (error) => {
-          console.error(`❌ Script failed to load: ${src}`, error);
-          reject(new Error(`Failed to load: ${src}`));
-        };
-        
-        // タイムアウト設定（10秒）
-        const timeout = setTimeout(() => {
-          console.error(`⏰ Script load timeout: ${src}`);
-          reject(new Error(`Timeout loading: ${src}`));
-        }, 10000);
-        
-        script.onload = () => {
-          clearTimeout(timeout);
-          console.log(`✅ Script loaded successfully: ${src}`);
-          resolve();
-        };
-        
-        script.onerror = (error) => {
-          clearTimeout(timeout);
-          console.error(`❌ Script failed to load: ${src}`, error);
+          console.error(`Script failed to load: ${src}`, error);
           reject(new Error(`Failed to load: ${src}`));
         };
         
@@ -256,296 +165,140 @@ const driveId = extractDriveId(driveUrl);
       });
     }
     
-    async loadPDF() {
+    private async loadPDF() {
       try {
-        const driveId = this.extractDriveId();
-        if (!driveId) {
-          throw new Error('Drive ID not found');
+        // 直接PDFファイルを読み込み（GitHub Pagesで動作）
+        const response = await fetch('/pdfs/NanoFrontier_Business_Overview_Simple.pdf');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        console.log('🚀 Starting PDF loading for Drive ID:', driveId);
+        const arrayBuffer = await response.arrayBuffer();
+        const uint8Array = new Uint8Array(arrayBuffer);
         
-        // 本番環境とローカル環境で異なるアプローチを試行
-        const pdfUrls = [
-          // 1. 自前プロキシAPI（ローカル環境）
-          `/api/drive-proxy?id=${encodeURIComponent(driveId)}`,
-          // 2. Google Drive直接アクセス（本番環境用、最も確実）
-          `https://drive.google.com/uc?export=download&id=${driveId}`,
-          // 3. Google Drive直接アクセス（代替URL）
-          `https://drive.google.com/file/d/${driveId}/uc?export=download`,
-          // 4. Google Drive直接アクセス（より確実な方法）
-          `https://drive.google.com/file/d/${driveId}/view?usp=sharing`,
-          // 5. Google Drive直接アクセス（最も確実な方法）
-          `https://drive.google.com/file/d/${driveId}/preview`,
-          // 6. Google Drive直接アクセス（新しい方法）
-          `https://drive.google.com/file/d/${driveId}/view`
-        ];
+        // PDF.jsでPDFを読み込み
+        const loadingTask = window.pdfjsLib.getDocument({ data: uint8Array });
+        this.pdfDoc = await loadingTask.promise;
+        this.totalPages = this.pdfDoc.numPages;
         
-        let pdf = null;
-        let lastError = null;
-        
-        // 順番に試行
-        for (let i = 0; i < pdfUrls.length; i++) {
-          try {
-            console.log(`🔄 Trying PDF source ${i + 1}: ${pdfUrls[i]}`);
-            
-            const response = await fetch(pdfUrls[i], { 
-              cache: 'no-store',
-              mode: 'cors',
-              headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; PDF-Viewer/1.0)'
-              }
-            });
-            
-            if (!response.ok) {
-              throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            // Content-Typeを確認
-            const contentType = response.headers.get('content-type') || '';
-            console.log(`📄 Content-Type: ${contentType}`);
-            
-            if (!contentType.includes('application/pdf') && !contentType.includes('octet-stream')) {
-              const text = await response.text();
-              console.error('Non-PDF response sample:', text.slice(0, 200));
-              throw new Error('Non-PDF response');
-            }
-            
-            const arrayBuffer = await response.arrayBuffer();
-            console.log(`📦 ArrayBuffer size: ${arrayBuffer.byteLength} bytes`);
-            
-            // ArrayBufferをUint8Arrayに変換してPDF.jsに渡す
-            pdf = await pdfjsLib.getDocument({
-              data: new Uint8Array(arrayBuffer)
-            }).promise;
-            
-            console.log(`✅ PDF loaded successfully from source ${i + 1}`);
-            break;
-            
-          } catch (error) {
-            console.warn(`❌ Source ${i + 1} failed:`, error);
-            lastError = error;
-            
-            // 最後の試行で失敗した場合
-            if (i === pdfUrls.length - 1) {
-              throw lastError;
-            }
-          }
-        }
-        
-        if (!pdf) {
-          throw new Error('All PDF sources failed');
-        }
-        
-        this.pdfDoc = pdf;
-        this.totalPages = pdf.numPages;
-        this.currentPage = Math.min(this.currentPage, this.totalPages);
-        
-        console.log(`📚 PDF loaded: ${this.totalPages} pages`);
-        
+        // 初期ページを表示
+        this.currentPage = 1;
+        this.renderPage();
         this.updatePageInfo();
         this.updateNavigation();
-        this.renderPage();
+        
+        // ローディング状態を更新
         this.hideLoading();
         
       } catch (error) {
-        console.error('PDF loading failed:', error);
-        console.log('🔄 Activating fallback mode...');
-        
-        // フォールバック: Google Driveの直接埋め込みを表示
-        this.showFallback();
+        console.error('PDF読み込みエラー:', error);
+        // エラーが発生しても何も表示しない（ダイアログなし）
+        this.hideLoading();
       }
     }
-    
-    extractDriveId() {
-      // コンポーネントのpropsから直接取得
-      const driveUrl = this.container.dataset.driveUrl;
-      if (driveUrl) {
-        const m1 = driveUrl.match(/\/d\/([^/]+)/);
-        if (m1) return m1[1];
-        const m2 = driveUrl.match(/[?&]id=([^&]+)/);
-        if (m2) return m2[1];
-        if (/^[A-Za-z0-9_-]{20,}$/.test(driveUrl)) return driveUrl;
-      }
-      return null;
+
+    private hideLoading() {
+      const loading = this.container.querySelector('#loading');
+      const canvasContainer = this.container.querySelector('#canvas-container');
+      if (loading) loading.classList.add('hidden');
+      if (canvasContainer) canvasContainer.classList.remove('hidden');
     }
-    
-    async renderPage() {
-      if (!this.pdfDoc || this.rendering) return;
+
+    private renderPage() {
+      if (!this.pdfDoc) return;
       
-      this.rendering = true;
-      const page = await this.pdfDoc.getPage(this.currentPage);
+      const canvas = this.container.querySelector('#pdf-canvas') as HTMLCanvasElement;
+      if (!canvas) return;
       
-      const canvas = this.container.querySelector('#pdf-canvas');
       const ctx = canvas.getContext('2d');
+      if (!ctx) return;
       
-      const viewport = page.getViewport({ scale: 1 });
-      const container = this.container.querySelector('#canvas-container');
-      const containerWidth = container.clientWidth;
-      const containerHeight = container.clientHeight;
-      
-      // 常に最大サイズで表示するスケール計算
-      let scale;
-      
-      // スライドを比率維持しながらフィットするスケール計算（ページごとに固定）
-      if (!this.fixedScale) {
-        // 初回は100%で開始、リサイズ後は適切に計算
-        if (this.isResized) {
-          // リサイズ後は画面サイズに合わせて計算
-          const scaleX = containerWidth / viewport.width;
-          const scaleY = containerHeight / viewport.height;
-          this.fixedScale = Math.min(scaleX, scaleY) * 0.9; // 90%で余白確保
-        } else {
-          // 初回は100%で開始
-          this.fixedScale = 1.0;
+      this.pdfDoc.getPage(this.currentPage).then((page: any) => {
+        const viewport = page.getViewport({ scale: 1.0 });
+        
+        // キャンバスのサイズを設定
+        if (canvas) {
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
         }
         
-        console.log('🔍 Scale calculation:', {
-          isResized: this.isResized,
-          viewport: { width: viewport.width, height: viewport.height },
-          container: { width: containerWidth, height: containerHeight },
-          screen: { width: window.innerWidth, height: window.innerHeight },
-          scale: this.fixedScale
-        });
-      }
-      
-      // 固定されたスケールを使用
-      scale = this.fixedScale;
-      
-      const scaledViewport = page.getViewport({ scale });
-      const dpr = window.devicePixelRatio || 1;
-      
-      // キャンバスのサイズを設定
-      canvas.width = Math.floor(scaledViewport.width * dpr);
-      canvas.height = Math.floor(scaledViewport.height * dpr);
-      canvas.style.width = Math.floor(scaledViewport.width) + 'px';
-      canvas.style.height = Math.floor(scaledViewport.height) + 'px';
-      
-      // 高解像度ディスプレイ対応
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      
-      const renderContext = {
-        canvasContext: ctx,
-        viewport: scaledViewport
-      };
-      
-      await page.render(renderContext).promise;
-      
-      this.updateProgress();
-      this.rendering = false;
-    }
-    
-    prevPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
+        // スケールを計算（コンテナに合わせて最適化）
+        const containerWidth = this.container.clientWidth - 40;
+        const containerHeight = this.container.clientHeight - 40;
+        
+        const scaleX = containerWidth / viewport.width;
+        const scaleY = containerHeight / viewport.height;
+        const scale = Math.min(scaleX, scaleY, 1.0);
+        
+        const scaledViewport = page.getViewport({ scale });
+        
+        // キャンバスサイズを再設定
+        if (canvas) {
+          canvas.width = scaledViewport.width;
+          canvas.height = scaledViewport.height;
+        }
+        
+        // ページをレンダリング
+        const renderContext = {
+          canvasContext: ctx,
+          viewport: scaledViewport
+        };
+        
+        page.render(renderContext);
+        
+        // ページ情報を更新
         this.updatePageInfo();
-        this.updateNavigation();
-        this.renderPage();
-      }
+        this.updateProgress();
+      });
     }
-    
-    nextPage() {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-        this.updatePageInfo();
-        this.updateNavigation();
-        this.renderPage();
-      }
-    }
-    
-    updatePageInfo() {
+
+    private updatePageInfo() {
+      if (!this.pdfDoc) return;
+      
       const currentPageEl = this.container.querySelector('#current-page');
       const totalPagesEl = this.container.querySelector('#total-pages');
       
       if (currentPageEl) currentPageEl.textContent = this.currentPage.toString();
       if (totalPagesEl) totalPagesEl.textContent = this.totalPages.toString();
     }
-    
-    updateNavigation() {
-      const prevBtn = this.container.querySelector('#prev-page');
-      const nextBtn = this.container.querySelector('#next-page');
+
+    private updateNavigation() {
+      const prevBtn = this.container.querySelector('#prev-page') as HTMLButtonElement;
+      const nextBtn = this.container.querySelector('#next-page') as HTMLButtonElement;
       
       if (prevBtn) prevBtn.disabled = this.currentPage <= 1;
       if (nextBtn) nextBtn.disabled = this.currentPage >= this.totalPages;
     }
-    
-    updateProgress() {
+
+    private updateProgress() {
       if (!this.totalPages) return;
       
       const progress = ((this.currentPage - 1) / (this.totalPages - 1)) * 100;
-      const progressBar = this.container.querySelector('#progress-bar');
+      const progressBar = this.container.querySelector('#progress-bar') as HTMLElement;
       if (progressBar) progressBar.style.width = `${progress}%`;
     }
-    
 
-    
+    private goToPage(pageNumber: number) {
+      if (!this.pdfDoc || pageNumber < 1 || pageNumber > this.pdfDoc.numPages) return;
+      
+      this.currentPage = pageNumber;
+      this.renderPage();
+      this.updateNavigation();
+    }
 
-    
-    hideLoading() {
-      const loading = this.container.querySelector('#loading');
-      const canvasContainer = this.container.querySelector('#canvas-container');
-      if (loading) loading.classList.add('hidden');
-      if (canvasContainer) canvasContainer.classList.remove('hidden');
-    }
-    
-    showError() {
-      const loading = this.container.querySelector('#loading');
-      const error = this.container.querySelector('#error');
-      if (loading) loading.classList.add('hidden');
-      if (error) error.classList.remove('hidden');
-    }
-    
-    showFallback() {
-      const canvasContainer = this.container.querySelector('#canvas-container');
-      if (canvasContainer) {
-        const driveId = this.extractDriveId();
-        if (driveId) {
-          console.log('🔄 Showing fallback for Drive ID:', driveId);
-          
-          // Google Drive previewでPDFを表示（最も確実）
-          const previewUrl = `https://drive.google.com/file/d/${driveId}/preview`;
-          
-          canvasContainer.innerHTML = `
-            <div class="text-center p-8">
-              <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                <p class="text-xs text-gray-400">💡 共有設定が「リンクを知っている全員」になっているか確認してください</p>
-                <p class="text-xs text-gray-400">🚀 PDFビューアーを動作させるには、ファイルの共有設定を「全員」に変更してください</p>
-              </div>
-              <iframe 
-                src="${previewUrl}" 
-                width="100%" 
-                height="600" 
-                frameborder="0"
-                class="border rounded-lg shadow-lg"
-                allowfullscreen
-                loading="lazy">
-              </iframe>
-            </div>
-          `;
-          
-          // iframeの読み込み確認
-          const iframe = canvasContainer.querySelector('iframe');
-          if (iframe) {
-            iframe.onload = () => console.log('✅ Fallback iframe loaded successfully');
-            iframe.onerror = () => console.log('❌ Fallback iframe failed to load');
-          }
-        } else {
-          console.error('❌ No Drive ID found for fallback');
-        }
+    private nextPage() {
+      if (this.pdfDoc && this.currentPage < this.pdfDoc.numPages) {
+        this.goToPage(this.currentPage + 1);
       }
     }
-    
-    retry() {
-      const error = this.container.querySelector('#error');
-      const loading = this.container.querySelector('#loading');
-      if (error) error.classList.add('hidden');
-      if (loading) loading.classList.remove('hidden');
-      
-      // 再読み込み
-      this.loadPDF();
+
+    private prevPage() {
+      if (this.currentPage > 1) {
+        this.goToPage(this.currentPage - 1);
+      }
     }
-    
-    bindEvents() {
+
+    private bindEvents() {
       const prevBtn = this.container.querySelector('#prev-page');
       const nextBtn = this.container.querySelector('#next-page');
       const prevZone = this.container.querySelector('#prev-zone');
@@ -556,57 +309,55 @@ const driveId = extractDriveId(driveUrl);
       prevZone?.addEventListener('click', () => this.prevPage());
       nextZone?.addEventListener('click', () => this.nextPage());
       
-      // 再試行ボタン
-      const retryBtn = this.container.querySelector('#retry-button');
-      retryBtn?.addEventListener('click', () => this.retry());
-      
       // Keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (this.container.contains(document.activeElement)) {
-          if (e.key === 'ArrowLeft') this.prevPage();
-          if (e.key === 'ArrowRight') this.nextPage();
-        }
-      });
+      document.addEventListener('keydown', this.handleKeyDown);
       
-      // Touch/swipe support
-      let startX = 0;
-      let endX = 0;
-      
-      this.container.addEventListener('touchstart', (e: TouchEvent) => {
-        startX = e.touches[0].clientX;
-      });
-      
-      this.container.addEventListener('touchend', (e: TouchEvent) => {
-        endX = e.changedTouches[0].clientX;
-        this.handleSwipe(startX, endX);
-      });
-      
-      // Resize handling
-      window.addEventListener('resize', () => {
-        // リサイズ時はスケールを再計算
-        this.fixedScale = null;
-        this.isResized = true; // リサイズフラグを設定
-        console.log('🔄 Window resized, recalculating scale...');
-        
-        // 少し遅延させてリサイズ完了を待つ
-        setTimeout(() => {
-          if (!this.rendering) {
-            this.renderPage();
-          }
-        }, 100);
-      });
+      // Touch events
+      const canvas = this.container.querySelector('#pdf-canvas');
+      if (canvas) {
+        canvas.addEventListener('touchstart', this.handleTouchStart as EventListener);
+        canvas.addEventListener('touchend', this.handleTouchEnd as EventListener);
+      }
     }
-    
-    handleSwipe(startX: number, endX: number) {
-      const threshold = 50;
-      const diff = startX - endX;
+
+    private handleKeyDown = (e: KeyboardEvent) => {
+      if (this.container.contains(document.activeElement)) {
+        if (e.key === 'ArrowLeft') {
+          this.prevPage();
+        } else if (e.key === 'ArrowRight') {
+          this.nextPage();
+        }
+      }
+    };
+
+    private handleTouchStart = (e: TouchEvent) => {
+      this.touchStartX = e.touches[0].clientX;
+    };
+
+    private handleTouchEnd = (e: TouchEvent) => {
+      if (!this.touchStartX) return;
       
-      if (Math.abs(diff) > threshold) {
-        if (diff > 0) {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diffX = this.touchStartX - touchEndX;
+      
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
           this.nextPage();
         } else {
           this.prevPage();
         }
+      }
+      
+      this.touchStartX = null;
+    };
+
+    public destroy() {
+      document.removeEventListener('keydown', this.handleKeyDown);
+      
+      const canvas = this.container.querySelector('#pdf-canvas');
+      if (canvas) {
+        canvas.removeEventListener('touchstart', this.handleTouchStart);
+        canvas.removeEventListener('touchend', this.handleTouchEnd);
       }
     }
   }
@@ -626,8 +377,8 @@ const driveId = extractDriveId(driveUrl);
   .pdf-viewer {
     transition: all 0.3s ease;
     width: 100%;
-    max-width: 1400px; /* 最大幅を制限 */
-    margin: 0 auto; /* 中央揃え */
+    max-width: 1400px;
+    margin: 0 auto;
   }
   
   .pdf-viewer:hover {
@@ -640,28 +391,25 @@ const driveId = extractDriveId(driveUrl);
     width: 100%;
   }
   
-
-  
   #pdf-viewer {
     width: 100%;
-    min-height: 60vh; /* デフォルトで画面の60%に削減 */
-    max-height: 75vh; /* 最大高さも制限 */
-    padding: 0; /* パディングを完全に排除 */
-    margin: 0; /* マージンを完全に排除 */
+    min-height: 60vh;
+    max-height: 75vh;
+    padding: 0;
+    margin: 0;
   }
   
-  /* デバイス別の最適化 */
   @media (max-width: 768px) {
     #pdf-viewer {
-      min-height: 50vh; /* スマホでは少し小さく */
-      max-height: 70vh; /* はみ出し防止 */
+      min-height: 50vh;
+      max-height: 70vh;
     }
   }
   
   @media (min-width: 1201px) {
     #pdf-viewer {
-      min-height: 70vh; /* PCでは大きく表示 */
-      max-height: 80vh; /* 余白を最小限に */
+      min-height: 70vh;
+      max-height: 80vh;
     }
   }
   
@@ -671,60 +419,58 @@ const driveId = extractDriveId(driveUrl);
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%; /* 親要素に合わせる */
-    min-height: 350px; /* 最小高さを削減 */
-    overflow: auto; /* スライドが大きい時はスクロール可能 */
-    padding: 1rem; /* 適度なパディングを追加 */
-    margin: 0; /* マージンを完全に排除 */
+    height: 100%;
+    min-height: 350px;
+    overflow: auto;
+    padding: 1rem;
+    margin: 0;
   }
   
-  /* デバイス別の最適化 */
   @media (max-width: 768px) {
     #canvas-container {
-      overflow: auto; /* スマホでもスクロール可能（比率維持のため） */
-      align-items: center; /* 中央揃えで表示 */
-      padding: 0.5rem; /* スマホでは小さめのパディング */
-      margin: 0; /* マージンを完全に排除 */
+      overflow: auto;
+      align-items: center;
+      padding: 0.5rem;
+      margin: 0;
     }
   }
   
   @media (min-width: 1201px) {
     #canvas-container {
-      overflow: auto; /* PCでもスクロール可能（比率維持のため） */
-      align-items: center; /* 中央揃えで表示 */
-      padding: 2rem; /* PCでは大きめのパディングで余白を確保 */
+      overflow: auto;
+      align-items: center;
+      padding: 2rem;
     }
   }
   
   #pdf-canvas {
-    border-radius: 0; /* 角丸を削除 */
-    box-shadow: none; /* 影を削除 */
-    max-width: none; /* 最大幅制限を解除（比率維持のため） */
-    max-height: none; /* 最大高さ制限を解除（比率維持のため） */
-    padding: 0; /* パディングを完全に排除 */
-    margin: 0; /* マージンを完全に排除 */
+    border-radius: 0;
+    box-shadow: none;
+    max-width: none;
+    max-height: none;
+    padding: 0;
+    margin: 0;
   }
   
-  /* Responsive adjustments */
   @media (max-width: 1200px) {
     .pdf-viewer {
       max-width: 100%;
-      margin: 0 1rem; /* 左右マージンを一定に */
+      margin: 0 1rem;
     }
     
     #pdf-viewer {
-      min-height: 55vh; /* 高さを削減 */
+      min-height: 55vh;
     }
   }
   
   @media (max-width: 768px) {
     .pdf-viewer {
-      margin: 0 1rem; /* マージンを一定に保つ */
+      margin: 0 1rem;
       border-radius: 8px;
     }
     
     #pdf-viewer {
-      min-height: 35vh; /* タブレットではさらに高さを削減 */
+      min-height: 35vh;
     }
     
     #canvas-container {
@@ -734,25 +480,25 @@ const driveId = extractDriveId(driveUrl);
   
   @media (max-width: 480px) {
     .pdf-viewer {
-      margin: 0 0.75rem; /* 小さい画面でもマージンを保つ */
+      margin: 0 0.75rem;
     }
     
     #pdf-viewer {
-      min-height: 25vh; /* スマホでは大幅に高さを削減 */
+      min-height: 25vh;
     }
     
     #canvas-container {
-      min-height: 200px; /* 最小高さも削減 */
+      min-height: 200px;
     }
   }
   
   @media (max-width: 360px) {
     .pdf-viewer {
-      margin: 0 0.5rem; /* 最小マージン */
+      margin: 0 0.5rem;
     }
     
     #pdf-viewer {
-      min-height: 20vh; /* 小さいスマホではさらに削減 */
+      min-height: 20vh;
     }
     
     #canvas-container {
