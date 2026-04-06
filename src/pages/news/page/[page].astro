@@ -1,37 +1,45 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import Layout from '../../../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL;
 
-// ページあたりのアイテム数
-const ITEMS_PER_PAGE = 20;
+type PageProps = {
+  currentPage: number;
+  totalPages: number;
+  newsList: Array<{
+    slug: string;
+    data: { date: string; title: string; summary: string };
+  }>;
+};
 
-// NOTE: Static builds don't generate different HTML for query params (e.g. ?page=2).
-// Page 1 is always rendered here; page 2+ are real routes under /news/page/[page]/.
-const currentPage = 1;
+export async function getStaticPaths() {
+  const ITEMS_PER_PAGE = 20;
 
-// ニュース記事を取得してソート
-const allNews = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
-  .sort((a, b) => b.data.date.localeCompare(a.data.date))
-  .map(news => ({
-    ...news,
-    slug: news.slug.replace('ja/', '')
+  const allNews = (await getCollection('news', ({ id }) => id.startsWith('ja/')))
+    .sort((a, b) => b.data.date.localeCompare(a.data.date))
+    .map(news => ({
+      ...news,
+      slug: news.slug.replace('ja/', ''),
+    }));
+
+  const totalPages = Math.ceil(allNews.length / ITEMS_PER_PAGE);
+
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1).filter(p => p > 1);
+
+  return pages.map(pageNum => ({
+    params: { page: String(pageNum) },
+    props: {
+      currentPage: pageNum,
+      totalPages,
+      newsList: allNews.slice((pageNum - 1) * ITEMS_PER_PAGE, pageNum * ITEMS_PER_PAGE),
+    } satisfies PageProps,
   }));
+}
 
-// 総ページ数を計算
-const totalPages = Math.ceil(allNews.length / ITEMS_PER_PAGE);
+const { currentPage, totalPages, newsList } = Astro.props as PageProps;
 
-// 現在のページのニュース記事を取得
-const newsList = allNews.slice(
-  (currentPage - 1) * ITEMS_PER_PAGE,
-  currentPage * ITEMS_PER_PAGE
-);
-
-// ページネーションのリンクを生成
 const createPageUrl = (pageNum: number) => {
-  if (pageNum === 1) {
-    return `${base}news/`;
-  }
+  if (pageNum === 1) return `${base}news/`;
   return `${base}news/page/${pageNum}/`;
 };
 ---
@@ -41,26 +49,18 @@ const createPageUrl = (pageNum: number) => {
   description="NanoFrontier株式会社からのニュースやお知らせをご覧いただけます。"
   lang="ja"
   alternateUrls={{
-    "en": "https://nanofrontier.co.jp/en/news/",
-    "ja": "https://nanofrontier.co.jp/news/"
+    en: "https://nanofrontier.co.jp/en/news/",
+    ja: "https://nanofrontier.co.jp/news/"
   }}
 >
-  {/* Backward-compatible redirect for old ?page=N links */}
-  <script is:inline>
-    {`(() => {
-      const params = new URLSearchParams(window.location.search);
-      const p = parseInt(params.get('page') || '1', 10);
-      if (Number.isFinite(p) && p > 1) {
-        window.location.replace(${JSON.stringify(`${base}news/page/`)} + p + '/');
-      }
-    })();`}
-  </script>
-
   <main class="container mx-auto px-4 py-12 pt-24">
     <h1 class="text-4xl font-bold mb-8" style="color:#04666c">ニュース・お知らせ</h1>
     <div class="space-y-6 mb-8">
       {newsList.map(news => (
-        <a href={`${base}news/${news.slug}`} class="block bg-white rounded-xl border border-gray-200 shadow hover:shadow-lg transition-shadow p-6">
+        <a
+          href={`${base}news/${news.slug}`}
+          class="block bg-white rounded-xl border border-gray-200 shadow hover:shadow-lg transition-shadow p-6"
+        >
           <div class="text-gray-500 text-sm mb-2">{news.data.date}</div>
           <h2 class="text-xl font-semibold mb-2" style="color:#04666c">{news.data.title}</h2>
           <p class="text-gray-700">{news.data.summary}</p>
@@ -109,4 +109,5 @@ const createPageUrl = (pageNum: number) => {
       </div>
     )}
   </main>
-</Layout> 
+</Layout>
+
