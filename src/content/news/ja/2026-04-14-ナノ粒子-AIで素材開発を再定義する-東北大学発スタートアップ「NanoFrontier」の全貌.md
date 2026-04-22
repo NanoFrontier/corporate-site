@@ -1,6 +1,7 @@
 ---
 title: "【メディア掲載】Polishing Hub（ポリッシングハブ）に掲載されました"
 date: "2026-04-14"
+summary: "Polishing Hubの特集記事で、NanoFrontierのナノ粒子製造技術と「手法売り」ビジネスモデル、PFAS簡易検出キット、AI・ロボティクス活用のR&D自動化、累計2.5億円超の資金調達と3軸成長戦略、東北発の地方創生アプローチが紹介されました。"
 media_name: "Polishing Hub（ポリッシングハブ）"
 article_type: "特集記事"
 original_url: "https://polishinghub.jp/archives/69"

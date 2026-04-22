@@ -1,6 +1,7 @@
 ---
 title: "【Media Coverage】Featured in Polishing Hub"
 date: "2026-04-14"
+summary: "A feature article in Polishing Hub covering NanoFrontier's proprietary nanoparticle manufacturing technology and technology-licensing business model, PFAS detection kit, AI- and robotics-driven R&D automation, cumulative fundraising of over 250 million yen and three-axis growth strategy, and regional revitalization approach from Tohoku."
 media_name: "Polishing Hub（ポリッシングハブ）"
 article_type: "特集記事"
 original_url: "https://polishinghub.jp/archives/69"
